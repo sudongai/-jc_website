@@ -1,7 +1,19 @@
 const path = require('path')
+const devServer = require('./src/config/index')
 module.exports = {
+  devServer, // 关于服务配置
   configureWebpack: config => {
     config.resolve = {
+      extensions: [
+        '.mjs',
+        '.js',
+        '.jsx',
+        '.vue',
+        '.json',
+        '.wasm',
+        '.ts',
+        '.tsx'
+      ],
       alias: {
         '@': path.resolve(__dirname, 'src'),
         '@common': path.resolve(__dirname, 'src/assets'),
