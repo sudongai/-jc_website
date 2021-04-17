@@ -2,7 +2,7 @@ const colors = require('colors')
 const proxy = require('./proxy')
 
 // 输入日志
-console.log(colors.rainbow('==================='))
+console.log(colors.rainbow(process.env.VUE_APP_URL))
 
 module.exports = {
   host: '0.0.0.0', // 主机 设置为0.0.0.0则所有的地址均能访问

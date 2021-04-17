@@ -35,7 +35,7 @@ module.exports = {
         '@mixins': path.resolve(__dirname, 'src/mixins'),
         '@components': path.resolve(__dirname, 'src/components'),
         '@views': path.resolve(__dirname, 'src/views'),
-        '@axios': path.resolve(__dirname, 'src/$http-config/index.js'),
+        '@axios': path.resolve(__dirname, 'src/$http/index.js'),
         '@api': path.resolve(__dirname, 'src/$api-config/index.js')
       }
     }
