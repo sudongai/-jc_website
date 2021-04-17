@@ -24,9 +24,29 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   // 响应数据处理
-  res => {},
+  res => {
+    if (res.data.code === 200) {
+      return res.data.content
+    } else {
+      Message.closeAll()
+      Message({
+        showClose: true,
+        message: res.data.msg || '网络异常，请稍后重试！',
+        type: 'error',
+        duration: 1500
+      })
+      return Promise.reject(res.data)
+    }
+  },
   // 响应错误处理
   err => {
+    Message.closeAll()
+    Message({
+      showClose: true,
+      message: '网络异常，请重试',
+      type: 'error',
+      duration: 1500
+    })
     return Promise.reject(error)
   }
 )
