@@ -11,9 +11,5 @@ module.exports = {
   https: false, // 是否启用https
   proxy, // 设置代理
   hotOnly: true, // 热更新
-  before: app => {},
-  overlay: { // 错误、警告在页面弹出
-    warnings: false,
-    errors: false,
-  },
+  before: app => {}
 }
