@@ -2,20 +2,19 @@ const colors = require('colors')
 const proxy = require('./proxy')
 
 // 输入日志
-console.log(colors.rainbow('\n =========接口代理列表 start========='))
-
-console.log(colors.rainbow('=========接口代理列表 end========= \n'))
+console.log(colors.rainbow('\n ========= 接口代理列表 start========= \n'))
+console.log(colors.rainbow('\n ========= 接口代理列表 end=========== \n'))
 
 
 module.exports = {
+  host: '0.0.0.0', // 主机 设置为0.0.0.0则所有的地址均能访问
+  port: 8080, // 端口
   open: true, // 自动打开浏览器
-  host: '0.0.0.0', // 设置为0.0.0.0则所有的地址均能访问 localhost
-  port: 8080, // 配置端口号
+  https: false, // 是否启用https
   proxy, // 设置代理
-  https: false,
-  hotOnly: false, // 热更新
+  hotOnly: true, // 热更新
   before: app => {},
-  overlay: {
+  overlay: { // 错误、警告在页面弹出
     warnings: false,
     errors: false,
   },
