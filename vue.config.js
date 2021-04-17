@@ -8,7 +8,6 @@ module.exports = {
   publicPath: publicPathsMap[process.env.NODE_ENV] || '', // 项目部署基础路径.
   outputDir: 'dist', // 项目构建文件目录.
   productionSourceMap: false, // 项目构建是否生成sourceMap文件.
-  lintOnSave: false, // 代码保存时是否进行eslint检测.
   devServer, // 关于服务配置
   chainWebpack: (config) => {
     // 查看打包体积大小
