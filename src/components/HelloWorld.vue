@@ -38,8 +38,9 @@ export default {
   props: {
     msg: String
   },
-  created () {
-    api.category({})
+  async mounted () {
+    const data = await api.category({case: 1, type: 'case'})
+    console.log(data)
   }
 }
 </script>

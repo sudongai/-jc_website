@@ -17,13 +17,13 @@ service.interceptors.request.use(
   // 请求前的处理
   config => {
     console.log(config)
-    // if (Object.prototype.toString.call(config.data) === '[object FormData]') {
-    //   return config
-    // }
-    // if (config.method === 'post' && config.url !== '/api/appeal/lists' && config.url !== '/api/appeal/stash' && config.url !== '/api/file/upload' && config.url !== '/api/appeal/completed' && config.url !== '/api/appeal/turnOver' && config.url !== '/api/sms/phoneImport') {
-    //   config.data = qs.stringify(config.data)
-    // }
-    // return config
+    if (Object.prototype.toString.call(config.data) === '[object FormData]') {
+      return config
+    }
+    if (config.method === 'post') {
+      config.data = qs.stringify(config.data)
+    }
+    return config
   },
   // 请求错误处理
   error => {
