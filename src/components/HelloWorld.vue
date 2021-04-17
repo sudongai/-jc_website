@@ -32,10 +32,14 @@
 </template>
 
 <script>
+import api from '@api'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  created () {
+    api.category({})
   }
 }
 </script>

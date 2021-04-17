@@ -36,7 +36,7 @@ module.exports = {
         '@components': path.resolve(__dirname, 'src/components'),
         '@views': path.resolve(__dirname, 'src/views'),
         '@axios': path.resolve(__dirname, 'src/$http/index.js'),
-        '@api': path.resolve(__dirname, 'src/$api-config/index.js')
+        '@api': path.resolve(__dirname, 'src/api/index.js')
       }
     }
     if (process.env.NODE_ENV === 'production') {

@@ -19,5 +19,5 @@ export default {
   // 新闻详情
   newsDetail (params) {
     return axios.post('/Cases/newsDetail', params)
-  },
+  }
 }
