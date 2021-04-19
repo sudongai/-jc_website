@@ -9,28 +9,34 @@
     </div>
   </div>
 </template>
+<script>
+import '@common/font/iconfont.css'
+export default {
+  created () {
+
+  }
+}
+</script>
 <style lang='less'>
 #app {
-  font-family : Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing : antialiased;
-  -moz-osx-font-smoothing : grayscale;
-  text-align : center;
-  color : #2C3E50;
-  position : relative;
+  position: relative;
   .home-nav {
-    position : fixed;
-    top : 0;
-    left : 0;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
   .margin-top {
-    margin-top : 60px;
+    margin-top: 60px;
   }
-  .el-header, .home-main {
-    padding : 0;
+  .el-header,
+  .home-main {
+    padding: 0;
   }
 }
 .margin-top60 {
-  margin-top : 60px;
+  margin-top: 60px;
 }
-
+.iconfont {
+  color: #fff;
+}
 </style>
