@@ -11,6 +11,7 @@
 </template>
 <script>
 import '@common/font/iconfont.css'
+import '@common/css/common.less'
 export default {
   created () {
 

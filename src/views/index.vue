@@ -10,24 +10,24 @@
       <p class="h1-title">企业文化</p>
       <p class="h2-title">CORPORATE CULTURE</p>
     </div>
-    <div class="flex">
+    <div class="flex coulture-box">
       <div class="coulture-item">
         <i class="iconfont icon-chuangyilinggan"></i>
-        <p>思维无界</p>
-        <span>————</span>
-        <p>从战略角度分析商业环境，从策略层面制定可衡量的市场传播计划。我们基于对市场、品牌、受众和消费者行为模式的充分了解，致力于为客户提供系统的方法和方案，从而创造卓越的商业价值。</p>
+        <p class="c-title">思维无界</p>
+        <span class="border">——</span>
+        <p class="content">从战略角度分析商业环境，从策略层面制定可衡量的市场传播计划。我们基于对市场、品牌、受众和消费者行为模式的充分了解，致力于为客户提供系统的方法和方案，从而创造卓越的商业价值。</p>
       </div>
       <div class="coulture-item">
         <i class="iconfont icon-jizhiwanmei"></i>
-        <p>极致完美</p>
-        <span>————</span>
-        <p>认真、负责的做好每一个环节，每一个嘉亿人都是追求完美的艺术家。我们信奉完美，追求极致，全心全力为您打造精品。通过专业细致的执行力，使我们的方案，转化为行动，完美极致的实现在您的眼前。</p>
+        <p class="c-title">极致完美</p>
+        <span class="border">——</span>
+        <p class="content">认真、负责的做好每一个环节，每一个嘉亿人都是追求完美的艺术家。我们信奉完美，追求极致，全心全力为您打造精品。通过专业细致的执行力，使我们的方案，转化为行动，完美极致的实现在您的眼前。</p>
       </div>
       <div class="coulture-item">
         <i class="iconfont icon-gaoxiaozhuanye"></i>
-        <p>高效专业</p>
-        <span>————</span>
-        <p>凭借多年的丰富经验，构建了以客户需求和行业要求为导向的专业服务体系及健全的服务网络。我们用热忱、认真、严谨的作风感染着每一个合作客户。为每一位客户提供优质高效的公关服务是我们永恒的承诺。
+        <p class="c-title">高效专业</p>
+        <span class="border">——</span>
+        <p class="content">凭借多年的丰富经验，构建了以客户需求和行业要求为导向的专业服务体系及健全的服务网络。我们用热忱、认真、严谨的作风感染着每一个合作客户。为每一位客户提供优质高效的公关服务是我们永恒的承诺。
         </p>
       </div>
     </div>
@@ -60,19 +60,6 @@ export default {
   justify-content: center;
   color: #fff;
 }
-.title-box {
-  padding: 40px 120px 24px;
-  font-weight: bold;
-  .h1-title {
-    font-size: 24px;
-    color: #333333;
-  }
-  .h2-title {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #999999;
-  }
-}
 @media only screen and (min-width: 1000px) {
   .banner {
     padding-top: 60px;
@@ -89,6 +76,50 @@ export default {
     }
     .font-size12 {
       font-size: 18px;
+    }
+  }
+  .coulture-box {
+    padding: 0 150px;
+    justify-content: space-around;
+    .coulture-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+      width: 400px;
+      box-sizing: border-box;
+      .iconfont {
+        color: #000;
+        font-size: 60px;
+      }
+      .border {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .c-title {
+        font-size: 18px;
+        color: #333333;
+        font-weight: bold;
+        margin: 15px 0 10px;
+      }
+      .content {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 20px;
+        color: #666666;
+      }
+      &:hover {
+        background: #ffffff;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+      }
+      &:hover .iconfont {
+        color: @red;
+      }
+      &:hover .border {
+        color: @red;
+      }
     }
   }
 }
@@ -111,6 +142,39 @@ export default {
     }
     .font-size2 {
       font-size: 14px;
+    }
+  }
+  .coulture-box {
+    flex-direction: column;
+    justify-content: space-around;
+    .coulture-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 15px;
+      box-sizing: border-box;
+      .iconfont {
+        color: @red;
+        font-size: 41px;
+      }
+      .border {
+        color: @red;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+      .c-title {
+        font-size: 14px;
+        color: #333333;
+        font-weight: bold;
+        margin: 11px 0 5px;
+      }
+      .content {
+        margin-top: 5px;
+        font-size: 12px;
+        line-height: 20px;
+        color: #666666;
+      }
     }
   }
 }
