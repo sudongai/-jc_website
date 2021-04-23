@@ -31,11 +31,12 @@
         </p>
       </div>
     </div>
+    <service></service>
   </div>
 </template>
 
 <script>
-
+import service from './service'
 export default {
   name: 'indexP',
   data () {
@@ -43,7 +44,9 @@ export default {
     }
   },
   props: [],
-  components: {},
+  components: {
+    service
+  },
   computed: {},
   methods: {},
   created () {
