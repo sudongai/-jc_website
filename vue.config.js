@@ -45,5 +45,19 @@ module.exports = {
         } else {
             // 为开发环境修改配置...
         }
+    },
+    // pluginOptions: {
+    //     "style-resources-loader": {
+    //         preProcessor: "less",
+    //         patterns: [path.resolve(__dirname, "./src/assets/css/mixins.less")]
+    //     }
+    // },
+    pluginOptions: {
+        "style-resources-loader": {
+            preProcessor: "less",
+            patterns: [path.resolve(__dirname, "./src/assets/css/mixins.less")]
+        }
+
+        　　
     }
 }
