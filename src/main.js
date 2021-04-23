@@ -10,6 +10,12 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
+const defaultTitle = '简创公关'
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title ? to.meta.title : defaultTitle
+  next()
+})
+
 new Vue({
     router,
     store,
