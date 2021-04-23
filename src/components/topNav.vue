@@ -113,8 +113,8 @@ export default {
       height: 60px;
       padding: 0 20px;
       &:hover {
-        color: #ffffff;
-        background: #af001e;
+        color: @blue;
+        // background: #af001e;
       }
     }
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);

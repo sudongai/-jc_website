@@ -10,8 +10,26 @@
       <p class="h1-title">企业文化</p>
       <p class="h2-title">CORPORATE CULTURE</p>
     </div>
-    <div>
-
+    <div class="flex">
+      <div class="coulture-item">
+        <i class="iconfont icon-chuangyilinggan"></i>
+        <p>思维无界</p>
+        <span>————</span>
+        <p>从战略角度分析商业环境，从策略层面制定可衡量的市场传播计划。我们基于对市场、品牌、受众和消费者行为模式的充分了解，致力于为客户提供系统的方法和方案，从而创造卓越的商业价值。</p>
+      </div>
+      <div class="coulture-item">
+        <i class="iconfont icon-jizhiwanmei"></i>
+        <p>极致完美</p>
+        <span>————</span>
+        <p>认真、负责的做好每一个环节，每一个嘉亿人都是追求完美的艺术家。我们信奉完美，追求极致，全心全力为您打造精品。通过专业细致的执行力，使我们的方案，转化为行动，完美极致的实现在您的眼前。</p>
+      </div>
+      <div class="coulture-item">
+        <i class="iconfont icon-gaoxiaozhuanye"></i>
+        <p>高效专业</p>
+        <span>————</span>
+        <p>凭借多年的丰富经验，构建了以客户需求和行业要求为导向的专业服务体系及健全的服务网络。我们用热忱、认真、严谨的作风感染着每一个合作客户。为每一位客户提供优质高效的公关服务是我们永恒的承诺。
+        </p>
+      </div>
     </div>
   </div>
 </template>
