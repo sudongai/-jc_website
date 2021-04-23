@@ -67,4 +67,10 @@ const router = new VueRouter({
   routes
 })
 
+const defaultTitle = '简创公关'
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title ? to.meta.title : defaultTitle
+  next()
+})
+
 export default router
