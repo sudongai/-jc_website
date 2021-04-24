@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import index from '../views/index.vue'
 import TopNav from '@components/topNav'
-import DefaDultC from '@views/default.vue'
+import DefaultC from '@views/default.vue'
+import {mapMutations} from 'vuex'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,7 @@ const routes = [{
         name: 'Home',
         components: {
             nav: TopNav,
-            default: DefaDultC
+            default: DefaultC
         },
         meta: {
             title: '简创'
@@ -64,13 +65,22 @@ const routes = [{
                 meta: {
                     title: '简创-联系我们'
                 }
+            },
+            {
+              path: '/caseDetail',
+              name: 'caseDetail',
+              component: () =>
+                    import ('../views/caseDetail.vue'),
+              meta: {
+                title: '详情'
+              }
             }
         ]
     }
 ]
 
 const router = new VueRouter({
-    routes
+  routes,
 })
 
 const defaultTitle = '简创公关'
@@ -78,5 +88,4 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title ? to.meta.title : defaultTitle
     next()
 })
-
 export default router
