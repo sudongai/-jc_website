@@ -5,8 +5,7 @@
       <img :src="logoPath"
            alt=""
            srcset="">
-      <nav class="nav"
-           v-if="!isMobile">
+      <nav class="nav pc-nav">
         <router-link to="./index"
                      :class="color000?'font-color000':'font-colorfff'">首页</router-link>
         <router-link to="./service"
@@ -18,8 +17,7 @@
         <router-link to="./cantact"
                      :class="color000?'font-color000':'font-colorfff'">联系</router-link>
       </nav>
-      <i v-else
-         class="iconfont icon-gengduo"
+      <i class="m-nav iconfont icon-gengduo "
          :class="color000?'font-colorred':'font-colorfff'"
          @click="handleShowNav(true)"></i>
     </el-header>
@@ -105,6 +103,12 @@ export default {
     img {
       height: 40px;
     }
+    .pc-nav {
+      display: block;
+    }
+    .m-nav {
+      display: none;
+    }
     a {
       font-size: 14px;
       color: #333333;
@@ -125,6 +129,12 @@ export default {
     height: 44px !important;
     img {
       height: 20px;
+    }
+    .pc-nav {
+      display: none;
+    }
+    .m-nav {
+      display: block;
     }
   }
 }
