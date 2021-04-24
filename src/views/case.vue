@@ -87,8 +87,6 @@ export default {
     }
   }
   .case-box {
-    width: 1920px;
-    margin: 0 auto;
     .flex-box(flex-start);
     flex-wrap: wrap;
     .case-item {
