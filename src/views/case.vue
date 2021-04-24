@@ -43,13 +43,11 @@ export default {
   methods: {
     async getCategory () {
       const res = await api.category().catch(err => Promise.reject(err))
-      const values = Object.values(res)
-      this.categoryOptions = values
+      this.categoryOptions = res
     },
     async getCaseList () {
       const res = await api.caseList({categoryId: this.activeId}).catch(err => Promise.reject(err))
-      const values = Object.values(res.list)
-      this.caseListOptions = values
+      this.caseListOptions = res.list
     },
     async getCaseDetail () {
       const res = await api.caseDetail()
