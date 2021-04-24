@@ -103,12 +103,16 @@ export default {
         }
       }
       .case-title {
+        max-width: 272px;
+        word-wrap:break-word;
         font-size: 16px;
         color: #333333;
         font-weight: bold;
         margin: 10px 0;
       }
       .case-company {
+        max-width: 272px;
+        word-wrap:break-word;
         font-size: 12px;
         color: #666666;
         margin-bottom: 20px;
@@ -154,12 +158,16 @@ export default {
         }
       }
       .case-title {
+        max-width: 272px;
+        word-wrap:break-word;
         font-size: 12px;
         color: #333333;
         font-weight: bold;
         margin: 10px 0;
       }
       .case-company {
+        max-width: 272px;
+        word-wrap:break-word;
         font-size: 12px;
         color: #666666;
         margin-bottom: 20px;
