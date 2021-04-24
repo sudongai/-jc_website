@@ -11,12 +11,12 @@
       </el-tabs>
     </div>
     <div class="case-box">
-      <div v-for="item in caseListOptions" :key="item.caseId" class="case-item">
+      <div v-for="(item, index) in caseListOptions" :key="item.caseId" class="case-item" @click="switchCase(item.caseId, index, caseListOptions.length)">
         <div class="case-img-box">
           <img :src="item.cover" alt="简创公关">
          </div>
-        <p class="case-title">{{item.title}}</p>
-        <p class="case-company">{{item.company}}</p>
+        <div class="case-title">| {{item.title}}</div>
+        <div class="case-company">{{item.company}}</div>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
 
 <script>
 import api from '@api'
-import {mapState} from 'vuex'
+import {mapState ,mapMutations} from 'vuex'
 export default {
   name: 'service',
   data () {
@@ -37,26 +37,38 @@ export default {
   props: [],
   components: {},
   computed: {
+    ...mapState(['caseList'])
   },
   watch: {
   },
   methods: {
+    ...mapMutations(['setCaseList', 'setCasePosition', 'setCaseLen', 'setPageTitle']),
     async getCategory () {
-      const res = await api.category().catch(err => Promise.reject(err))
-      const values = Object.values(res)
-      this.categoryOptions = values
+      const res = await api.getCategory().catch(err => Promise.reject(err))
+      this.categoryOptions = res
     },
     async getCaseList () {
-      const res = await api.caseList({categoryId: this.activeId}).catch(err => Promise.reject(err))
-      const values = Object.values(res.list)
-      this.caseListOptions = values
+      const res = await api.getCaseList({categoryId: this.activeId}).catch(err => Promise.reject(err))
+      this.caseListOptions = res.list
+      this.setCaseList(res.list) // 往仓库填案例列表数据
     },
     async getCaseDetail () {
-      const res = await api.caseDetail()
+      const res = await api.getCaseDetail()
       console.log(res)
     },
     handleClick() {
       this.getCaseList()
+    },
+    switchCase (id, index, len) {
+      this.setPageTitle('< 案例详情')
+      this.setCasePosition(index)
+      this.setCaseLen(len)
+      this.$router.push({
+        path: '/caseDetail',
+        query: {
+          caseId: id
+        }
+      })
     }
   },
   created () {
@@ -83,6 +95,9 @@ export default {
     .flex-box(flex-start);
     flex-wrap: wrap;
     .case-item {
+      &:hover .case-title{
+        color: @red;
+      }
       padding:0 20px 0 0;
       .case-img-box {
         img {
@@ -96,23 +111,23 @@ export default {
           left: 0;
           background:#000;
           opacity: 0.3;
-          .wh(272px,181px)
+          .wh(272px,181px);
         }
         &:hover:after {
           opacity: 0;
         }
       }
       .case-title {
-        max-width: 272px;
-        word-wrap:break-word;
+        width: 272px;
+        word-wrap: break-word;
         font-size: 16px;
         color: #333333;
         font-weight: bold;
         margin: 10px 0;
       }
       .case-company {
-        max-width: 272px;
-        word-wrap:break-word;
+        width: 272px;
+        word-wrap: break-word;
         font-size: 12px;
         color: #666666;
         margin-bottom: 20px;
@@ -134,11 +149,14 @@ export default {
     .flex-box();
     flex-wrap: wrap;
     .case-item {
+      &:hover .case-title{
+        color: @red;
+      }
       width: 50%;
       box-sizing: border-box;
-      text-align: center;
       padding: 20px 15px 0;
       .case-img-box {
+        text-align: center;
         img {
           .wh(165px,110px);
         }
@@ -158,19 +176,17 @@ export default {
         }
       }
       .case-title {
-        max-width: 272px;
-        word-wrap:break-word;
+        width: 165px;
         font-size: 12px;
         color: #333333;
         font-weight: bold;
-        margin: 10px 0;
+        margin: 10px auto;
       }
       .case-company {
-        max-width: 272px;
-        word-wrap:break-word;
+        width: 165px;
+        margin: 0 auto 20px;
         font-size: 12px;
         color: #666666;
-        margin-bottom: 20px;
       }
     }
   }

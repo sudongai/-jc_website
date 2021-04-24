@@ -1,23 +1,23 @@
 import axios from '@axios'
 export default {
   // 案例分类
-  category (params) {
+  getCategory (params) {
     return axios.post('/Cases/category', params)
   },
   // 案例列表
-  caseList (params) {
+  getCaseList (params) {
     return axios.post('/Cases/caseList', params)
   },
   // 案例详情
-  caseDetail (params) {
+  getCaseDetail (params) {
     return axios.post('/Cases/caseDetail', params)
   },
   // 新闻列表
-  newsList (params) {
+  getNewsList (params) {
     return axios.post('/News/newsList', params)
   },
   // 新闻详情
-  newsDetail (params) {
+  getNewsDetail (params) {
     return axios.post('/Cases/newsDetail', params)
   }
 }

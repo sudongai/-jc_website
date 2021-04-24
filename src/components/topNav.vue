@@ -4,7 +4,9 @@
     <el-header :class="color000?'bg-color000':'bg-colorfff'">
       <img :src="logoPath"
            alt=""
-           srcset="">
+           srcset=""
+           v-if="!pageTitle ">
+      <span @click="goToPage" v-if="pageTitle && screenWidth <= 1000"> {{pageTitle}} </span>
       <nav class="nav pc-nav">
         <router-link to="./index"
                      :class="color000?'font-color000':'font-colorfff'">首页</router-link>
@@ -52,6 +54,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['pageTitle', 'screenWidth'])
   },
   methods: {
     setNavColor () {
@@ -60,6 +63,12 @@ export default {
     },
     handleShowNav (state) {
       this.isShowNav = state
+    },
+    goToPage () {
+      // this.$emit('goToPage')
+      this.$store.commit('setPageTitle','')
+      this.$router.go(-1)
+      // window.location.reload()
     }
   },
   created () {
