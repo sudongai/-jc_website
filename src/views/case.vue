@@ -37,13 +37,6 @@ export default {
   props: [],
   components: {},
   computed: {
-    ...mapState('module1', [
-      'screenWidth',
-      'screenHeight'
-    ]),
-    isMobile () {
-      return this.screenWidth < 1000
-    }
   },
   watch: {
   },

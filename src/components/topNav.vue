@@ -52,13 +52,6 @@ export default {
     }
   },
   computed: {
-    ...mapState('module1', [
-      'screenWidth',
-      'screenHeight'
-    ]),
-    isMobile () {
-      return this.screenWidth < 1000
-    }
   },
   methods: {
     setNavColor () {

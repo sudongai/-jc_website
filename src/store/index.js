@@ -3,15 +3,11 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import module1 from './module/module1/index.js'
-import module2 from './module/module2/index.js'
-
 export default new Vuex.Store({
-    state: {},
+    state: {
+      screenWidth: document.documentElement.clientWidth, //屏幕宽度
+      screenHeight: document.documentElement.clientHeight, //屏幕高度
+    },
     mutations: {},
-    actions: {},
-    modules: {
-      module1,
-      module2
-    }
+    actions: {}
 })
