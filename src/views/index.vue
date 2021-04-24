@@ -31,12 +31,14 @@
         </p>
       </div>
     </div>
+    <caseC></caseC>
     <service></service>
   </div>
 </template>
 
 <script>
 import service from './service'
+import caseC from './case'
 export default {
   name: 'indexP',
   data () {
@@ -45,7 +47,8 @@ export default {
   },
   props: [],
   components: {
-    service
+    service,
+    caseC
   },
   computed: {},
   methods: {},
