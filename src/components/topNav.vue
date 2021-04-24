@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <el-header>
+    <el-header :class="color000?'bg-color000':'bg-colorfff'">
       <img :src="logoPath"
            alt=""
            srcset="">
@@ -89,6 +89,12 @@ export default {
     background: #af001e;
     color: #ffffff;
   }
+}
+.bg-color000 {
+  background: #fff;
+}
+.bg-colorfff {
+  // background: #000;
 }
 @media only screen and (min-width: 1000px) {
   .el-header {
