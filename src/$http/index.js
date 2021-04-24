@@ -26,8 +26,8 @@ service.interceptors.request.use(
     return config
   },
   // 请求错误处理
-  error => {
-    return Promise.reject(error)
+  err => {
+    return Promise.reject(err)
   }
 )
 // 响应拦截器
@@ -56,7 +56,7 @@ service.interceptors.response.use(
       type: 'error',
       duration: 1500
     })
-    return Promise.reject(error)
+    return Promise.reject(err)
   }
 )
 

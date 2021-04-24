@@ -6,16 +6,30 @@
 </template>
 
 <script>
+import api from '@api'
+import {mapState} from 'vuex'
 export default {
-  name: '',
+  name: 'service',
   data () {
-    return {}
+    return {
+      
+    }
   },
   props: [],
   components: {},
-  computed: {},
-  methods: {},
-  created () { }
+  computed: {
+    ...mapState('module1', [
+      'screenWidth',
+      'screenHeight'
+    ]),
+    isMobile () {
+      return this.screenWidth < 1000
+    }
+  },
+  methods: {
+  },
+  created () {
+  }
 }
 </script>
 <style lang='less' scoped>
