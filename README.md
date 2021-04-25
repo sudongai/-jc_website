@@ -17,3 +17,9 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 样式问题
+```
+主颜色在 'src/assets/css/mixins.less'
+
+```

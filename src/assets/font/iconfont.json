@@ -1,0 +1,65 @@
+{
+  "id": "2489157",
+  "name": "简创公关",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "21008331",
+      "name": "创意灵感",
+      "font_class": "chuangyilinggan",
+      "unicode": "e714",
+      "unicode_decimal": 59156
+    },
+    {
+      "icon_id": "21008332",
+      "name": "极致完美",
+      "font_class": "jizhiwanmei",
+      "unicode": "e715",
+      "unicode_decimal": 59157
+    },
+    {
+      "icon_id": "21008333",
+      "name": "高效专业",
+      "font_class": "gaoxiaozhuanye",
+      "unicode": "e716",
+      "unicode_decimal": 59158
+    },
+    {
+      "icon_id": "21008420",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e717",
+      "unicode_decimal": 59159
+    },
+    {
+      "icon_id": "21008421",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e718",
+      "unicode_decimal": 59160
+    },
+    {
+      "icon_id": "21008422",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e719",
+      "unicode_decimal": 59161
+    },
+    {
+      "icon_id": "21008423",
+      "name": "历程",
+      "font_class": "licheng",
+      "unicode": "e71a",
+      "unicode_decimal": 59162
+    },
+    {
+      "icon_id": "21008424",
+      "name": "服务",
+      "font_class": "fuwu",
+      "unicode": "e71b",
+      "unicode_decimal": 59163
+    }
+  ]
+}
