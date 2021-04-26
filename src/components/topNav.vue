@@ -135,6 +135,7 @@ export default {
 @media only screen and (max-width: 1000px) {
   .el-header {
     height: 44px !important;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.15);
     img {
       height: 20px;
     }

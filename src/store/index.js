@@ -9,7 +9,6 @@ export default new Vuex.Store({
       screenHeight: document.documentElement.clientHeight, //屏幕高度
       caseList: [], // 案例列表
       casePosition: '', // 当前案例索引
-      caseLen: '', // 案例长度
       pageTitle:'' // XX详情
     },
     mutations: {
@@ -18,9 +17,6 @@ export default new Vuex.Store({
       },
       setCasePosition (state, payload) {
         state.casePosition = payload
-      },
-      setCaseLen (state, payload) {
-        state.caseLen = payload
       },
       setPageTitle(state, payload) {
         state.pageTitle = payload

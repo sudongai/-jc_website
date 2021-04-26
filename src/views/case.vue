@@ -11,7 +11,7 @@
       </el-tabs>
     </div>
     <div class="case-box">
-      <div v-for="(item, index) in caseListOptions" :key="item.caseId" class="case-item" @click="switchCase(item.caseId, index, caseListOptions.length)">
+      <div v-for="(item, index) in caseListOptions" :key="item.caseId" class="case-item" @click="switchCase(item.caseId, index)">
         <div class="case-img-box">
           <img :src="item.cover" alt="简创公关">
          </div>
@@ -52,17 +52,12 @@ export default {
       this.caseListOptions = res.list
       this.setCaseList(res.list) // 往仓库填案例列表数据
     },
-    async getCaseDetail () {
-      const res = await api.getCaseDetail()
-      console.log(res)
-    },
     handleClick() {
       this.getCaseList()
     },
-    switchCase (id, index, len) {
+    switchCase (id, index) {
       this.setPageTitle('< 案例详情')
       this.setCasePosition(index)
-      this.setCaseLen(len)
       this.$router.push({
         path: '/caseDetail',
         query: {
@@ -74,7 +69,6 @@ export default {
   created () {
     this.getCategory()
     this.getCaseList()
-    this.getCaseDetail()
   }
 }
 </script>
@@ -121,6 +115,7 @@ export default {
         width: 272px;
         word-wrap: break-word;
         font-size: 16px;
+        line-height: 22px;
         color: #333333;
         font-weight: bold;
         margin: 10px 0;
@@ -129,6 +124,7 @@ export default {
         width: 272px;
         word-wrap: break-word;
         font-size: 12px;
+        line-height: 16px;
         color: #666666;
         margin-bottom: 20px;
       }
