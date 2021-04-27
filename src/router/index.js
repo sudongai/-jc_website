@@ -42,7 +42,7 @@ const routes = [
         {
           path: 'detail',
           name: 'detail',
-          component: () => import('@views/details'),
+          component: () => import('@views/detail'),
           meta: {
             title: '简创-详情'
           }
