@@ -61,27 +61,27 @@ export default {
         {
           title: '品牌策略',
           content: '品牌定位、形象设计、战略规划、品牌营销、媒介服务、广告投放',
-          img: require('../assets/imgs/Img_ppcl.jpg')
+          img: require('@common/imgs/Img_ppcl.jpg')
         }, {
           title: '活动策划',
           content: '活动策划公司专注于线下活动的策划与执行，专业有序地组织市场活动，提供精彩创意与对活动的精准把握',
-          img: require('../assets/imgs/Img_hdch.jpg')
+          img: require('@common/imgs/Img_hdch.jpg')
         }, {
           title: '场地服务',
           content: '海量数据、精准信息、快速搜索轻松对比、替您砍价、帮您选优',
-          img: require('../assets/imgs/Img_cdfw.jpg')
+          img: require('@common/imgs/Img_cdfw.jpg')
         }, {
           title: '影视制作',
           content: '宣传片拍摄、广告片制作、广告宣传视频拍摄、线下活动拍摄、云摄影、小视频',
-          img: require('../assets/imgs/Img_yszz.jpg')
+          img: require('@common/imgs/Img_yszz.jpg')
         }, {
           title: '搭建服务',
           content: 'LED、舞美设备',
-          img: require('../assets/imgs/Img_djfw.jpg')
+          img: require('@common/imgs/Img_djfw.jpg')
         }, {
           title: '团建',
           content: '素质拓展、趣味运动会、定向拓展、高空拓展、水上项目、主题团建等',
-          img: require('../assets/imgs/Img_tj.jpg')
+          img: require('@common/imgs/Img_tj.jpg')
         }
       ]
     }

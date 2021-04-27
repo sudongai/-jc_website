@@ -8,15 +8,15 @@
            v-if="!pageTitle ">
       <span @click="goToPage" v-if="pageTitle && screenWidth <= 1000"> {{pageTitle}} </span>
       <nav class="nav pc-nav">
-        <router-link to="./index"
+        <router-link to="/index"
                      :class="color000?'font-color000':'font-colorfff'">首页</router-link>
-        <router-link to="./service"
+        <router-link to="/service"
                      :class="color000?'font-color000':'font-colorfff'">服务</router-link>
-        <router-link to="./case"
+        <router-link to="/case"
                      :class="color000?'font-color000':'font-colorfff'">案例</router-link>
-        <router-link to="./news"
+        <router-link to="/news"
                      :class="color000?'font-color000':'font-colorfff'">新闻</router-link>
-        <router-link to="./cantact"
+        <router-link to="/cantact"
                      :class="color000?'font-color000':'font-colorfff'">联系</router-link>
       </nav>
       <i class="m-nav iconfont icon-gengduo "

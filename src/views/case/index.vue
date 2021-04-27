@@ -59,7 +59,7 @@ export default {
       this.setPageTitle('< 案例详情')
       this.setCasePosition(index)
       this.$router.push({
-        path: '/caseDetail',
+        path: '/detail',
         query: {
           caseId: id
         }
