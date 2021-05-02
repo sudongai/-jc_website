@@ -11,9 +11,9 @@ module.exports = {
     devServer, // 关于服务配置
     chainWebpack: (config) => {
         // 查看打包体积大小
-        config
-            .plugin('webpack-bundle-analyzer')
-            .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+        // config
+        //     .plugin('webpack-bundle-analyzer')
+        //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
     },
     configureWebpack: config => {
         config.entry = './src/main.js'
