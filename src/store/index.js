@@ -5,22 +5,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-      screenWidth: document.documentElement.clientWidth, //屏幕宽度
-      screenHeight: document.documentElement.clientHeight, //屏幕高度
-      caseList: [], // 案例列表
-      casePosition: '', // 当前案例索引
-      pageTitle:'' // XX详情
+        screenWidth: document.documentElement.clientWidth, // 屏幕宽度
+            screenHeight: document.documentElement.clientHeight, // 屏幕高度
+        caseList: [], // 案例列表
+        casePosition: '', // 当前案例索引
+        pageTitle: '', // XX详情
+        // routerName: Vue.$router.name
     },
     mutations: {
-      setCaseList (state, payload) {
-        state.caseList = payload
-      },
-      setCasePosition (state, payload) {
-        state.casePosition = payload
-      },
-      setPageTitle(state, payload) {
-        state.pageTitle = payload
-      }
+        setCaseList(state, payload) {
+            state.caseList = payload
+        },
+        setCasePosition(state, payload) {
+            state.casePosition = payload
+        },
+        setPageTitle(state, payload) {
+            state.pageTitle = payload
+        }
     },
     actions: {}
 })

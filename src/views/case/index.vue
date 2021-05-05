@@ -6,15 +6,23 @@
         <p class="h1-title">服务案例</p>
         <p class="h2-title">SERVICE CASE</p>
       </div>
-      <el-tabs v-model="activeId" @tab-click="handleClick">
-        <el-tab-pane v-for="item in categoryOptions" :key="item.categoryId" :label="item.cateName" :name="item.categoryId"></el-tab-pane>
+      <el-tabs v-model="activeId"
+               @tab-click="handleClick">
+        <el-tab-pane v-for="item in categoryOptions"
+                     :key="item.categoryId"
+                     :label="item.cateName"
+                     :name="item.categoryId"></el-tab-pane>
       </el-tabs>
     </div>
     <div class="case-box">
-      <div v-for="(item, index) in caseListOptions" :key="item.caseId" class="case-item" @click="switchCase(item.caseId, index)">
+      <div v-for="(item, index) in caseListOptions"
+           :key="item.caseId"
+           class="case-item"
+           @click="switchCase(item.caseId, index)">
         <div class="case-img-box">
-          <img :src="item.cover" alt="简创公关">
-         </div>
+          <img :src="item.cover"
+               alt="简创公关">
+        </div>
         <div class="case-title">| {{item.title}}</div>
         <div class="case-company">{{item.company}}</div>
       </div>
@@ -24,7 +32,7 @@
 
 <script>
 import api from '@api'
-import {mapState ,mapMutations} from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'service',
   data () {
@@ -48,21 +56,21 @@ export default {
       this.categoryOptions = res
     },
     async getCaseList () {
-      const res = await api.getCaseList({categoryId: this.activeId}).catch(err => Promise.reject(err))
+      const res = await api.getCaseList({ categoryId: this.activeId }).catch(err => Promise.reject(err))
       this.caseListOptions = res.list
       this.setCaseList(res.list) // 往仓库填案例列表数据
     },
-    handleClick() {
+    handleClick () {
       this.getCaseList()
     },
     switchCase (id, index) {
       this.setPageTitle('< 案例详情')
       this.setCasePosition(index)
       this.$router.push({
-        path: '/detail',
-        query: {
-          caseId: id
-        }
+        path: 'detail',
+        // query: {
+        //   caseId: id
+        // }
       })
     }
   },
@@ -89,21 +97,21 @@ export default {
     .flex-box(flex-start);
     flex-wrap: wrap;
     .case-item {
-      &:hover .case-title{
+      &:hover .case-title {
         color: @red;
       }
-      padding:0 20px 0 0;
+      padding: 0 20px 0 0;
       .case-img-box {
         img {
           .wh(272px,181px);
         }
         position: relative;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
-          background:#000;
+          background: #000;
           opacity: 0.3;
           .wh(272px,181px);
         }
@@ -145,7 +153,7 @@ export default {
     .flex-box();
     flex-wrap: wrap;
     .case-item {
-      &:hover .case-title{
+      &:hover .case-title {
         color: @red;
       }
       width: 50%;
@@ -158,14 +166,14 @@ export default {
         }
         position: relative;
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 50%;
           margin-left: -82.5px;
-          background:#000;
+          background: #000;
           opacity: 0.3;
-          .wh(165px,110px)
+          .wh(165px,110px);
         }
         &:hover:after {
           opacity: 0;

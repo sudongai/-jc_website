@@ -2,28 +2,41 @@
   <div class="case-detail margin-top60">
     <div class="main-page">
       <div class="nav-key">
-        <el-button type="text" @click="returnFn">&lt; 返回</el-button>
-        <el-button type="text" :disabled='prevCase' @click="handlePrevCase">上一个案例</el-button>
-        <el-button type="text" :disabled='nextCase' @click="handlenNextCase">下一个案例</el-button>
+        <el-button type="text"
+                   @click="returnFn">&lt; 返回</el-button>
+        <el-button type="text"
+                   :disabled='prevCase'
+                   @click="handlePrevCase">上一个案例</el-button>
+        <el-button type="text"
+                   :disabled='nextCase'
+                   @click="handlenNextCase">下一个案例</el-button>
       </div>
-      <div v-if="Object.keys(pageInfo).length > 0" class="content-page">
+      <div v-if="Object.keys(pageInfo).length > 0"
+           class="content-page">
         <div class="det-title">{{pageInfo.caseInfo.description}}</div>
         <!-- <div class="det-tags">{{pageInfo.caseInfo.tag}}</div> -->
-        <span class="det-tag" v-for="(item, index) in pageInfo.caseInfo.tag" :key="index"># {{item}}</span>
+        <span class="det-tag"
+              v-for="(item, index) in pageInfo.caseInfo.tag"
+              :key="index"># {{item}}</span>
         <hr class="det-hr">
         <!-- <div class="det-description">{{pageInfo.caseInfo.description}}</div> -->
-        <div class="det-content" v-html="pageInfo.caseInfo.content"></div>
+        <div class="det-content"
+             v-html="pageInfo.caseInfo.content"></div>
       </div>
       <div class="nav-bottom-key">
-        <el-button type="text" :disabled='prevCase' @click="handlePrevCase">上一个案例</el-button>
-        <el-button type="text" :disabled='nextCase' @click="handlenNextCase">下一个案例</el-button>
+        <el-button type="text"
+                   :disabled='prevCase'
+                   @click="handlePrevCase">上一个案例</el-button>
+        <el-button type="text"
+                   :disabled='nextCase'
+                   @click="handlenNextCase">下一个案例</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import api from '@api'
 export default {
   name: 'caseDetail',
@@ -32,18 +45,18 @@ export default {
       pageInfo: {}
     }
   },
-  computed : {
+  computed: {
     ...mapState(['casePosition', 'caseList']),
     prevCase () {
-     return  this.casePosition < 0 
+      return this.casePosition < 0
     },
     nextCase () {
-      return this.casePosition > this.caseList.length 
+      return this.casePosition > this.caseList.length
     }
   },
   methods: {
     returnFn () {
-      this.$router.replace('/case')
+      this.$router.go(-1)
     },
     handlePrevCase () {
     },
@@ -52,7 +65,7 @@ export default {
     async getCaseDetail () {
       // 此处需要传递参数
       const res = await api.getCaseDetail().catch(() => { })
-      const {caseInfo, imgList} = res
+      const { caseInfo, imgList } = res
       this.$set(this.pageInfo, 'caseInfo', caseInfo)
       this.$set(this.pageInfo, 'imgList', imgList)
     }
@@ -60,9 +73,10 @@ export default {
   created () {
     this.getCaseDetail()
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     // 导航离开该组件的对应路由时调用
     // 可以访问组件实例 `this`
+    next()
   }
 }
 </script>
@@ -83,7 +97,7 @@ export default {
       padding-bottom: 20px;
     }
     .det-tag {
-      color: #AF001E;
+      color: #af001e;
       display: inline-block;
     }
     // .det-description {
@@ -112,7 +126,7 @@ export default {
       .det-tag {
         font-size: 14px;
         padding: 15px 0 25px;
-        & + .det-tag{
+        & + .det-tag {
           margin-left: 10px;
         }
       }
@@ -120,13 +134,13 @@ export default {
       //   font-size: 12px;
       // }
     }
-    .nav-bottom-key{
+    .nav-bottom-key {
       display: none;
     }
   }
 }
 @media screen and (max-width: 1000px) {
- .margin-top60 {
+  .margin-top60 {
     margin-top: 44px;
   }
   .main-page {
@@ -141,7 +155,7 @@ export default {
       .det-tag {
         font-size: 12px;
         padding: 10px 0;
-        & + .det-tag{
+        & + .det-tag {
           margin-left: 20px;
         }
       }
@@ -149,7 +163,7 @@ export default {
       //   font-size: 12px;
       // }
     }
-    .nav-bottom-key{
+    .nav-bottom-key {
       display: block;
       font-size: 12px;
       padding: 0 40px;

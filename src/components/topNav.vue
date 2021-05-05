@@ -5,8 +5,9 @@
       <img :src="logoPath"
            alt=""
            srcset=""
-           v-if="!pageTitle ">
-      <span @click="goToPage" v-if="pageTitle && screenWidth <= 1000"> {{pageTitle}} </span>
+           v-if="!pageTitle && !routerNameIsDetail">
+      <span @click="goToPage"
+            v-if="pageTitle && screenWidth <= 1000"> {{pageTitle}} </span>
       <nav class="nav pc-nav">
         <router-link to="/index"
                      :class="color000?'font-color000':'font-colorfff'">首页</router-link>
@@ -39,7 +40,8 @@ export default {
     return {
       logoPath: logoWhite,
       color000: false,
-      isShowNav: false
+      isShowNav: false,
+      routerNameIsDetail: ''
     }
   },
   components: {
@@ -54,7 +56,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['pageTitle', 'screenWidth'])
+    ...mapState(['pageTitle', 'screenWidth']),
   },
   methods: {
     setNavColor () {
@@ -66,12 +68,13 @@ export default {
     },
     goToPage () {
       // this.$emit('goToPage')
-      this.$store.commit('setPageTitle','')
+      this.$store.commit('setPageTitle', '')
       this.$router.go(-1)
       // window.location.reload()
     }
   },
   created () {
+    this.routerNameIsDetail = this.$route.name === 'detail'
     this.setNavColor()
   }
 }
@@ -135,7 +138,7 @@ export default {
 @media only screen and (max-width: 1000px) {
   .el-header {
     height: 44px !important;
-    box-shadow: 0 0 4px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
     img {
       height: 20px;
     }
