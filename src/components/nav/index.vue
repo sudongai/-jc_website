@@ -1,7 +1,7 @@
 <template>
   <div class="page-box">
     <div class="nav-bar-box"
-         :class="$route.path !== '/index' ? 'not-index-page' : '' ">
+         :class="[$route.path !== '/index' ? 'not-index-page' : '' , $route.path === '/index' && navbg ? 'navbg' : '']">
       <!-- 首页是红色的logo-->
       <img v-if="$route.path==='/index'"
            :src="whiteLogo"
@@ -77,12 +77,12 @@ export default {
     return {
       whiteLogo,
       redLogo,
-      drawer: false
+      drawer: false,
+      navbg: false
     }
   },
-  computed: {
-  },
-  watch: {
+  mounted () {
+    window.addEventListener('scroll', this.windowScroll)
   },
   methods: {
     open_mobile_menu () {
@@ -94,8 +94,15 @@ export default {
     go_to_route (route) {
       this.$router.push(route)
       this.drawer = false
+    },
+    windowScroll () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      this.navbg = scrollTop >= 500
     }
   },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.windowScroll)
+  }
 }
 </script>
 
@@ -121,14 +128,7 @@ export default {
     }
   }
 }
-.not-index-page {
-  background-color: #fff;
-  .nav-box {
-    a {
-      color: #333333;
-    }
-  }
-}
+
 @media screen and (min-width: 1000px) {
   .nav-bar-box {
     padding: 0 120px;
@@ -156,6 +156,17 @@ export default {
         color: #fff;
       }
     }
+  }
+  .not-index-page {
+    background-color: #fff;
+    .nav-box {
+      a {
+        color: #333333;
+      }
+    }
+  }
+  .navbg {
+    background: #333;
   }
 }
 @media screen and (max-width: 1000px) {
