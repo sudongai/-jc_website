@@ -1,7 +1,6 @@
 <!-- 入口页面 -->
 <template>
   <div>
-      <top-nav></top-nav>
       <div class="banner">
         <p class="font-size3">全国领先的专业营销整合机构</p>
         <p class="font-size1">Chinese Leading professional marketing integration organization</p>
@@ -32,31 +31,25 @@
           </p>
         </div>
       </div>
-      <case-c></case-c>
-      <service></service>
+      <an-li></an-li>
+      <fu-wu></fu-wu>
    
   </div>
 </template>
 
 <script>
-import service from './service'
-import caseC from './case'
-import topNav from '../components/topNav.vue'
+import fuWu from '@views/fuwu'
+import anLi from '@views/anli'
 export default {
-  name: 'indexP',
+  name: 'index',
   data () {
     return {
     }
   },
   props: [],
   components: {
-    service,
-    caseC,
-    topNav
-  },
-  computed: {},
-  methods: {},
-  created () {
+    fuWu,
+    anLi
   }
 }
 </script>
@@ -74,7 +67,7 @@ export default {
   .banner {
     padding-top: 60px;
     height: 500px;
-    background: url("../assets/imgs/Img_sy_banner_web.jpg") top left no-repeat;
+    background: url("../../assets/imgs/Img_sy_banner_web.jpg") top left no-repeat;
     background-size: 100% 100%;
 
     .font-size3 {
@@ -137,7 +130,7 @@ export default {
   .banner {
     padding-top: 44px;
     height: 320px;
-    background: url("../assets/imgs/Img_sy_banner_wap.jpg") top left no-repeat;
+    background: url("../../assets/imgs/Img_sy_banner_wap.jpg") top left no-repeat;
     background-size: 100% 100%;
 
     .font-size3 {

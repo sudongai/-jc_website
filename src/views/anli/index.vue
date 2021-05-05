@@ -1,6 +1,6 @@
 <!-- 案例 -->
 <template>
-  <div class="margin-top60">
+  <div class="case-page">
     <div class="tab-box">
       <div class="title-box">
         <p class="h1-title">服务案例</p>
@@ -42,7 +42,7 @@ export default {
   watch: {
   },
   methods: {
-    ...mapMutations(['setCaseList', 'setCasePosition', 'setCaseLen', 'setPageTitle']),
+    ...mapMutations(['setCaseList', 'setCasePosition']),
     async getCategory () {
       const res = await api.getCategory().catch(err => Promise.reject(err))
       this.categoryOptions = res
@@ -50,16 +50,16 @@ export default {
     async getCaseList () {
       const res = await api.getCaseList({categoryId: this.activeId}).catch(err => Promise.reject(err))
       this.caseListOptions = res.list
+      console.log(res.list)
       this.setCaseList(res.list) // 往仓库填案例列表数据
     },
     handleClick() {
       this.getCaseList()
     },
     switchCase (id, index) {
-      this.setPageTitle('< 案例详情')
       this.setCasePosition(index)
       this.$router.push({
-        path: '/detail',
+        path: '/case_detail',
         query: {
           caseId: id
         }
@@ -72,6 +72,7 @@ export default {
   }
 }
 </script>
+
 <style lang='less' scoped>
 @media only screen and (min-width: 1000px) {
   .tab-box {

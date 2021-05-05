@@ -1,6 +1,6 @@
 <!-- 服务 -->
 <template>
-  <div class="margin-top60">
+  <div>
     <!-- 服务经验 -->
     <div class="banner">
       <div class="banner-item"

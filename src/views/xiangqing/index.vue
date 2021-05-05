@@ -1,5 +1,5 @@
 <template>
-  <div class="case-detail margin-top60">
+  <div class="case-detail">
     <div class="main-page">
       <div class="nav-key">
         <el-button type="text" @click="returnFn">&lt; 返回</el-button>
@@ -29,40 +29,46 @@ export default {
   name: 'caseDetail',
   data () {
     return {
-      pageInfo: {}
+      pageInfo: {},
+      caseId: ''
     }
   },
   computed : {
     ...mapState(['casePosition', 'caseList']),
     prevCase () {
-     return  this.casePosition < 0 
+     return this.casePosition <= 0 
     },
     nextCase () {
-      return this.casePosition > this.caseList.length 
+      return this.casePosition >= this.caseList.length - 1 
     }
   },
   methods: {
+    ...mapMutations(['setCasePosition']),
     returnFn () {
-      this.$router.replace('/case')
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     handlePrevCase () {
+      this.setCasePosition(this.casePosition-1)
+      console.log('上一个案例', '当前索引', this.casePosition)
+      const caseId = this.caseList[this.casePosition].caseId
+      this.getCaseDetail(caseId)
     },
     handlenNextCase () {
+      this.setCasePosition(this.casePosition+1)
+      console.log('下一个案例', '当前索引', this.casePosition)
+      const caseId = this.caseList[this.casePosition].caseId
+      this.getCaseDetail(caseId)
     },
-    async getCaseDetail () {
-      // 此处需要传递参数
-      const res = await api.getCaseDetail().catch(() => { })
+    async getCaseDetail (caseId) {
+      const res = await api.getCaseDetail({caseId: caseId}).catch(() => { })
       const {caseInfo, imgList} = res
       this.$set(this.pageInfo, 'caseInfo', caseInfo)
       this.$set(this.pageInfo, 'imgList', imgList)
     }
   },
   created () {
-    this.getCaseDetail()
-  },
-  beforeRouteLeave(to, from, next) {
-    // 导航离开该组件的对应路由时调用
-    // 可以访问组件实例 `this`
+    this.getCaseDetail(this.$route.query.caseId)
+    console.log('路由参数', this.$route.query.caseId)
   }
 }
 </script>
@@ -126,9 +132,6 @@ export default {
   }
 }
 @media screen and (max-width: 1000px) {
- .margin-top60 {
-    margin-top: 44px;
-  }
   .main-page {
     .nav-key {
       display: none;

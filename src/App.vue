@@ -1,42 +1,17 @@
 <template>
   <div id="app">
-    <header class="home-nav"
-            height="60px">
-      <router-view name="nav" />
-    </header>
-    <div class="home-main">
-      <router-view />
-    </div>
+    <router-view name="nav"></router-view>
+    <router-view class="container"></router-view>
   </div>
 </template>
+
 <script>
 export default {
-  created () {
-
-  }
 }
 </script>
+
 <style lang='less'>
-#app {
-  position: relative;
-  .home-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-  }
-  .margin-top {
-    margin-top: 60px;
-  }
-  .el-header,
-  .home-main {
-    padding: 0;
-  }
-}
-.margin-top60 {
-  margin-top: 60px;
-}
-.iconfont {
-  color: #fff;
+.container {
+  margin-top: 65px;
 }
 </style>
