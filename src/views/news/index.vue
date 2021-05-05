@@ -42,8 +42,6 @@ export default {
       }
     }
   },
-  watch: {
-  },
   methods: {
     ...mapMutations(['setNewsList']),
     toDetail (item) {
@@ -54,8 +52,6 @@ export default {
         }
       })
     }
-  },
-  components: {
   },
   async created () {
     const res = await api.getNewsList().catch(err => { })

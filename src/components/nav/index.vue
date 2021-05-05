@@ -16,10 +16,10 @@
         <img :src="redLogo"
              class="case-detail-img">
         <div class="detail-back">
-          <i class="iconfont icon-fanhui"></i>
+          <i class="iconfont icon-fanhui"
+             @click="$router.go(-1)"></i>
           <el-button class="case-detail-title"
-                     type="text"
-                     @click="$router.go(-1)">
+                     type="text">
             {{$route.path==='/news_detail'?'新闻详情':($route.path==='/case_detail'?'案例详情':'')}}
           </el-button>
         </div>
@@ -151,6 +151,7 @@ export default {
       }
       .nav-switch-sty {
         background-color: #af001e;
+        color: #fff;
       }
     }
   }

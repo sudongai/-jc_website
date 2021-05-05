@@ -33,12 +33,14 @@
     </div>
     <case-c></case-c>
     <service></service>
+    <footertop />
   </div>
 </template>
 
 <script>
 import service from '@views/service'
 import caseC from '@views/case/index.vue'
+import footertop from '@components/footer/footerTop.vue'
 export default {
   name: 'index',
   data () {
@@ -48,7 +50,8 @@ export default {
   props: [],
   components: {
     service,
-    caseC
+    caseC,
+    footertop
   }
 }
 </script>

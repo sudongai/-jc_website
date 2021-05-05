@@ -11,7 +11,9 @@ const routes = [{
         nav: () =>
             import ('@components/nav/index.vue'),
         default: () =>
-            import ('@components/default/index.vue')
+            import ('@components/default/index.vue'),
+        footer: () =>
+            import ('@components/footer/footerbottom.vue'),
     },
     children: [{
             path: 'index',

@@ -67,7 +67,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['casePosition', 'newsPosition', 'caseList']),
+    ...mapState(['casePosition', 'newsPosition', 'caseList', 'newsList']),
     prevCaseStat () {
       return this.casePosition <= 0
     },
@@ -91,15 +91,15 @@ export default {
       const caseId = this.caseList[this.casePosition].caseId
       this.getCaseDetail(caseId)
     },
-    prevNews () {
-      this.setNewsPosition(this.newsPosition - 1)
-      const newsId = this.newsList[this.newsPosition].newsId
-      this.getNewsDetail(newsId)
-    },
     nextCase () {
       this.setCasePosition(this.casePosition + 1)
       const caseId = this.caseList[this.casePosition].caseId
       this.getCaseDetail(caseId)
+    },
+    prevNews () {
+      this.setNewsPosition(this.newsPosition - 1)
+      const newsId = this.newsList[this.newsPosition].newsId
+      this.getNewsDetail(newsId)
     },
     nextNews () {
       this.setNewsPosition(this.newsPosition + 1)
