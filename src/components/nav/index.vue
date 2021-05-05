@@ -1,7 +1,7 @@
 <template>
   <div class="page-box">
     <div class="nav-bar-box"
-         :class="$route.path!=='/index'?'not-index-page':''">
+         :class="$route.path !== '/index' ? 'not-index-page' : '' ">
       <!-- 首页是红色的logo-->
       <img v-if="$route.path==='/index'"
            :src="whiteLogo"
@@ -106,9 +106,11 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 2000;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
   .nav-box {
     display: inline-flex;
     align-items: center;
