@@ -1,23 +1,23 @@
 <template>
 <div class="page-box">
-  <div class="nav-box">
+  <div class="nav-bar-box">
     <!-- 首页是红色的logo-->
-    <img v-if="$route.path==='/index'" :src="whiteLogo" class="img img-private">
+    <img v-if="$route.path==='/index'" :src="whiteLogo" class="img">
     <!-- 除首页，详情页外，其它页面是白色logo  -->
-    <img v-else-if="$route.path!=='/index' && $route.path!=='/case_detail' && $route.path!=='/news_detail'" :src="redLogo" class="img img-private">
-    <!-- 详情页专属 -->
+    <img v-else-if="$route.path!=='/index' && $route.path!=='/case_detail' && $route.path!=='/news_detail'" :src="redLogo" class="img">
+    <!-- 详情页导航栏专属 -->
     <div v-else-if="$route.path!=='/case_detail' || $route.path!=='/news_detail'" >
       <!-- 通过css媒体查询控制导航栏最左侧，移动端显示回退按钮，pc端显示logo -->
-      <img :src="redLogo" class="case-detail-img case-detail-img-private">
-      <div class="detail-back-private">
-        <i class="iconfont icon-fanhui icon-fanhui-private"></i>
-        <el-button class="case-detail-title-private" type="text" @click="$router.go(-1)">
+      <img :src="redLogo" class="case-detail-img">
+      <div class="detail-back">
+        <i class="iconfont icon-fanhui"></i>
+        <el-button class="case-detail-title" type="text" @click="$router.go(-1)">
           {{$route.path==='/news_detail'?'新闻详情':($route.path==='/case_detail'?'案例详情':'')}}
         </el-button>
       </div>
     </div>
     <!-- pc端导航栏 -->
-    <nav class="nav nav-private">
+    <nav class="nav">
       <router-link to="/index" :class="{'nav-switch-sty': $route.path==='/index'}">首页</router-link>
       <router-link to="/service" :class="{'nav-switch-sty': $route.path==='/service'}">服务</router-link>
       <router-link to="/case" :class="{'nav-switch-sty': $route.path==='/case'}">案例</router-link>
@@ -25,12 +25,12 @@
       <router-link to="/contact" :class="{'nav-switch-sty': $route.path==='/contact'}">联系</router-link>
     </nav>
     <!-- 移动端导航入口 -->
-    <i class="iconfont icon-gengduo more-icon-private" @click="open_mobile_menu"></i>
+    <i class="iconfont icon-gengduo more-icon" @click="open_mobile_menu"></i>
   </div>
   <!-- 移动端导航抽屉 -->
   <el-drawer
     :visible.sync="drawer"
-    class="drawer-private"
+    class="drawer-box"
     :close-on-press-escape="false"
     :modal="false"
     :show-close="false">
@@ -38,7 +38,7 @@
       <i class="iconfont icon-guanbi" @click="drawer_close"></i>
       <img :src="whiteLogo">
     </div>
-    <nav class="nav-mobile-private">
+    <nav class="drawer-nav-box">
       <span class="a" @click="go_to_route('/index')">首页</span>
       <span class="a" @click="go_to_route('/service')">服务</span>
       <span class="a" @click="go_to_route('/case')">案例</span>
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.nav-box {
+.nav-bar-box {
   box-sizing: border-box;
   width: 100%;
   position: fixed;
@@ -91,7 +91,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .nav {
+  .nav-box {
     display: inline-flex;
     align-items: center;
     a {
@@ -101,7 +101,7 @@ export default {
   }
 }
 @media screen and (min-width: 1000px) {
-  .nav-box {
+  .nav-bar-box {
     padding: 0 120px;
     height: 65px;
     .img {
@@ -110,13 +110,13 @@ export default {
     .case-detail-img {
       height: 40px; // PC端展示详情logo图标
     }
-    .detail-back-private{
+    .detail-back{
       display: none;
     }
-    .more-icon-private {
+    .more-icon {
       display: none; // PC端隐藏Menu图标
     }
-    .nav {
+    .nav-box {
       a {
         width: 75px;
         height: 65px;
@@ -130,7 +130,7 @@ export default {
   }
 }
 @media screen and (max-width: 1000px) {
-  .drawer-private {
+  .drawer-box {
     /deep/ .el-drawer__container {
       div {
         width: 100%!important;
@@ -151,7 +151,7 @@ export default {
           }
         }
         section {
-          .nav-mobile-private {
+          .drawer-nav-box {
             width: 100%;
             box-sizing: border-box;
             padding: 0 30px;
@@ -170,34 +170,33 @@ export default {
       }
     }
   }
-  .nav-box {
+  .nav-bar-box {
     padding: 0 15px;
     height: 45px;
-    .img-private {
+    .img {
       width: 80px;
       height: 24px;
     }
-    .case-detail-img-private {
+    .case-detail-img {
       display: none; // 移动端隐藏详情logo图标
     }
-    .detail-back-private{
+    .detail-back {
       display: flex;
-      justify-content:flex-start;
       align-items: center;
-      .icon-fanhui-private{
+      .icon-fanhui {
         font-size: 14px; 
         font-weight: bold; 
         margin-right: 10px;
       }
-      .case-detail-title-private {
+      .case-detail-title {
         font-size: 14px;
         color: #333333;
       }
     }
-    .nav-private {
+    .nav-box {
       display: none; // 移动端隐藏Pc端的导航
     }
-    .more-icon-private {
+    .more-icon {
       display: block;
       color: #fff;
     }
