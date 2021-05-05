@@ -9,14 +9,14 @@ const routes = [
     name: '/',
     redirect: '/index',
     components: {
-      nav: () => import('@components/daohang/index.vue'),
+      nav: () => import('@components/nav/index.vue'),
       default: () => import('@components/default/index.vue')
     },
     children: [
       {
         path: 'index',
         name: 'index',
-        component: () => import('@views/shouye/index.vue'),
+        component: () => import('@views/home/index.vue'),
         meta: {
           title: '简创公关'
         }
@@ -24,7 +24,7 @@ const routes = [
       {
         path: 'service',
         name: 'service',
-        component: () => import('@views/fuwu/index.vue'),
+        component: () => import('@views/service/index.vue'),
         meta: {
           title: '简创-服务'
         }
@@ -32,7 +32,7 @@ const routes = [
       {
         path: 'case',
         name: 'case',
-        component: () => import('@views/anli/index.vue'),
+        component: () => import('@views/case/index.vue'),
         meta: {
           title: '简创-案例'
         }
@@ -40,7 +40,7 @@ const routes = [
       {
         path: 'news',
         name: 'news',
-        component: () => import('@views/xinwen/index.vue'),
+        component: () => import('@views/news/index.vue'),
         meta: {
           title: '简创-新闻'
         }
@@ -48,7 +48,7 @@ const routes = [
       {
         path: 'contact',
         name: 'contact',
-        component: () => import('@views/lianxi/index.vue'),
+        component: () => import('@views/contact/index.vue'),
         meta: {
           title: '简创-联系'
         }
@@ -56,7 +56,7 @@ const routes = [
       {
         path: 'case_detail',
         name: 'case_detail',
-        component: () => import('@views/xiangqing/index.vue'),
+        component: () => import('@views/detail/index.vue'),
         meta: {
           title: '简创-案例-详情'
         }
@@ -64,7 +64,7 @@ const routes = [
       {
         path: 'news_detail',
         name: 'news_detail',
-        component: () => import('@views/xiangqing/index.vue'),
+        component: () => import('@views/detail/index.vue'),
         meta: {
           title: '简创-新闻-详情'
         }

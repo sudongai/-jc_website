@@ -3,10 +3,10 @@
     <div class="main-page">
       <div class="nav-key">
         <el-button type="text" @click="returnFn">&lt; 返回</el-button>
-        <el-button type="text" :disabled='prevCaseStat' @click="prevCase" v-if="$route.path='/case_detail'">上一个案例</el-button>
-        <el-button type="text" :disabled='nextCaseStat' @click="nextCase" v-if="$route.path='/case_detail'">下一个案例</el-button>
-        <el-button type="text" :disabled='prevNewsStat' @click="prevNews" v-if="$route.path='/news_detail'">上一条新闻</el-button>
-        <el-button type="text" :disabled='nextNewsStat' @click="nextNews" v-if="$route.path='/news_detail'">下一条新闻</el-button>
+        <el-button type="text" :disabled='prevCaseStat' @click="prevCase" v-if="$route.path==='/case_detail'">上一个案例</el-button>
+        <el-button type="text" :disabled='nextCaseStat' @click="nextCase" v-if="$route.path==='/case_detail'">下一个案例</el-button>
+        <el-button type="text" :disabled='prevNewsStat' @click="prevNews" v-if="$route.path==='/news_detail'">上一条新闻</el-button>
+        <el-button type="text" :disabled='nextNewsStat' @click="nextNews" v-if="$route.path==='/news_detail'">下一条新闻</el-button>
       </div>
       <div v-if="Object.keys(pageInfo).length > 0" class="content-page">
         <div class="det-title">{{pageInfo.caseInfo.description}}</div>
@@ -17,10 +17,10 @@
         <div class="det-content" v-html="pageInfo.caseInfo.content"></div>
       </div>
       <div class="nav-bottom-key">
-        <el-button type="text" :disabled='prevCaseStat' @click="prevCase" v-if="$route.path='/case_detail'">上一个案例</el-button>
-        <el-button type="text" :disabled='nextCaseStat' @click="nextCase" v-if="$route.path='/case_detail'">下一个案例</el-button>
-        <el-button type="text" :disabled='prevNewsStat' @click="prevNews" v-if="$route.path='/news_detail'">上一条新闻</el-button>
-        <el-button type="text" :disabled='nextNewsStat' @click="nextNews" v-if="$route.path='/news_detail'">下一条新闻</el-button>
+        <el-button type="text" :disabled='prevCaseStat' @click="prevCase" v-if="$route.path==='/case_detail'">上一个案例</el-button>
+        <el-button type="text" :disabled='nextCaseStat' @click="nextCase" v-if="$route.path==='/case_detail'">下一个案例</el-button>
+        <el-button type="text" :disabled='prevNewsStat' @click="prevNews" v-if="$route.path==='/news_detail'">上一条新闻</el-button>
+        <el-button type="text" :disabled='nextNewsStat' @click="nextNews" v-if="$route.path==='/news_detail'">下一条新闻</el-button>
       </div>
     </div>
   </div>
