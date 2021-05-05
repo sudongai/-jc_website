@@ -33,15 +33,14 @@
     </div>
     <case-c></case-c>
     <service></service>
-
   </div>
 </template>
 
 <script>
 import service from '@views/service'
-import caseC from '@views/case'
+import caseC from '@views/case/index.vue'
 export default {
-  name: 'indexP',
+  name: 'index',
   data () {
     return {
     }
@@ -50,11 +49,6 @@ export default {
   components: {
     service,
     caseC
-  },
-  computed: {},
-  methods: {
-  },
-  created () {
   }
 }
 </script>
@@ -72,9 +66,9 @@ export default {
   .banner {
     padding-top: 60px;
     height: 500px;
-    // background: url("../assets/imgs/Img_sy_banner_web.jpg") top left no-repeat;
-    // background-size: 100% 100%;
-    .bis("../../assets/imgs/Img_sy_banner_web.jpg");
+    background: url("../../assets/imgs/Img_sy_banner_web.jpg") top left
+      no-repeat;
+    background-size: 100% 100%;
 
     .font-size3 {
       font-size: 32px;
@@ -136,9 +130,9 @@ export default {
   .banner {
     padding-top: 44px;
     height: 320px;
-    // background: url("../assets/imgs/Img_sy_banner_wap.jpg") top left no-repeat;
-    // background-size: 100% 100%;
-    .bis("../../assets/imgs/Img_sy_banner_web.jpg");
+    background: url("../../assets/imgs/Img_sy_banner_wap.jpg") top left
+      no-repeat;
+    background-size: 100% 100%;
 
     .font-size3 {
       font-size: 18px;

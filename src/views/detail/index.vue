@@ -1,15 +1,25 @@
 <template>
-  <div class="case-detail margin-top60">
+  <div class="case-detail">
     <div class="main-page">
       <div class="nav-key">
         <el-button type="text"
                    @click="returnFn">&lt; 返回</el-button>
         <el-button type="text"
-                   :disabled='prevCase'
-                   @click="handlePrevCase">上一个案例</el-button>
+                   :disabled='prevCaseStat'
+                   @click="prevCase"
+                   v-if="$route.path==='/case_detail'">上一个案例</el-button>
         <el-button type="text"
-                   :disabled='nextCase'
-                   @click="handlenNextCase">下一个案例</el-button>
+                   :disabled='nextCaseStat'
+                   @click="nextCase"
+                   v-if="$route.path==='/case_detail'">下一个案例</el-button>
+        <el-button type="text"
+                   :disabled='prevNewsStat'
+                   @click="prevNews"
+                   v-if="$route.path==='/news_detail'">上一条新闻</el-button>
+        <el-button type="text"
+                   :disabled='nextNewsStat'
+                   @click="nextNews"
+                   v-if="$route.path==='/news_detail'">下一条新闻</el-button>
       </div>
       <div v-if="Object.keys(pageInfo).length > 0"
            class="content-page">
@@ -25,11 +35,21 @@
       </div>
       <div class="nav-bottom-key">
         <el-button type="text"
-                   :disabled='prevCase'
-                   @click="handlePrevCase">上一个案例</el-button>
+                   :disabled='prevCaseStat'
+                   @click="prevCase"
+                   v-if="$route.path==='/case_detail'">上一个案例</el-button>
         <el-button type="text"
-                   :disabled='nextCase'
-                   @click="handlenNextCase">下一个案例</el-button>
+                   :disabled='nextCaseStat'
+                   @click="nextCase"
+                   v-if="$route.path==='/case_detail'">下一个案例</el-button>
+        <el-button type="text"
+                   :disabled='prevNewsStat'
+                   @click="prevNews"
+                   v-if="$route.path==='/news_detail'">上一条新闻</el-button>
+        <el-button type="text"
+                   :disabled='nextNewsStat'
+                   @click="nextNews"
+                   v-if="$route.path==='/news_detail'">下一条新闻</el-button>
       </div>
     </div>
   </div>
@@ -42,41 +62,73 @@ export default {
   name: 'caseDetail',
   data () {
     return {
-      pageInfo: {}
+      pageInfo: {},
+      caseId: ''
     }
   },
   computed: {
-    ...mapState(['casePosition', 'caseList']),
-    prevCase () {
-      return this.casePosition < 0
+    ...mapState(['casePosition', 'newsPosition', 'caseList']),
+    prevCaseStat () {
+      return this.casePosition <= 0
     },
-    nextCase () {
-      return this.casePosition > this.caseList.length
+    nextCaseStat () {
+      return this.casePosition >= this.caseList.length - 1
+    },
+    prevNewsStat () {
+      return this.newsPosition <= 0
+    },
+    nextNewsStat () {
+      return this.newsPosition >= this.newsList.length - 1
     }
   },
   methods: {
+    ...mapMutations(['setCasePosition', 'setNewsPosition']),
     returnFn () {
-      this.$router.go(-1)
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    handlePrevCase () {
+    prevCase () {
+      this.setCasePosition(this.casePosition - 1)
+      const caseId = this.caseList[this.casePosition].caseId
+      this.getCaseDetail(caseId)
     },
-    handlenNextCase () {
+    prevNews () {
+      this.setNewsPosition(this.newsPosition - 1)
+      const newsId = this.newsList[this.newsPosition].newsId
+      this.getNewsDetail(newsId)
     },
-    async getCaseDetail () {
-      // 此处需要传递参数
-      const res = await api.getCaseDetail().catch(() => { })
+    nextCase () {
+      this.setCasePosition(this.casePosition + 1)
+      const caseId = this.caseList[this.casePosition].caseId
+      this.getCaseDetail(caseId)
+    },
+    nextNews () {
+      this.setNewsPosition(this.newsPosition + 1)
+      const newsId = this.newsList[this.newsPosition].newsId
+      this.getNewsDetail(newsId)
+    },
+    // 通过caseId获取案例详情
+    async getCaseDetail (caseId) {
+      const res = await api.getCaseDetail({ caseId }).catch(() => { })
+      // 歧义 数据格式有歧义，待定
       const { caseInfo, imgList } = res
       this.$set(this.pageInfo, 'caseInfo', caseInfo)
       this.$set(this.pageInfo, 'imgList', imgList)
+    },
+    // 通过newsId获取新闻详情
+    async getNewsDetail (newsId) {
+      const res = await api.getNewsDetail({ newsId }).catch(() => { })
+      // 歧义 数据格式有歧义，待定
     }
   },
   created () {
-    this.getCaseDetail()
-  },
-  beforeRouteLeave (to, from, next) {
-    // 导航离开该组件的对应路由时调用
-    // 可以访问组件实例 `this`
-    next()
+    if (this.$route.path === '/case_detail') {
+      console.log('路由参数', this.$route.query.caseId)
+      this.getCaseDetail(this.$route.query.caseId)
+    }
+    if (this.$route.path === '/news_detail') {
+      console.log('路由参数', this.$route.query.newsId)
+      this.getNewsDetail(this.$route.query.newsId)
+    }
   }
 }
 </script>
@@ -140,9 +192,6 @@ export default {
   }
 }
 @media screen and (max-width: 1000px) {
-  .margin-top60 {
-    margin-top: 44px;
-  }
   .main-page {
     .nav-key {
       display: none;
