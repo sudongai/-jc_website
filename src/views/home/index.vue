@@ -66,10 +66,9 @@ export default {
   .banner {
     padding-top: 60px;
     height: 500px;
-    background: url("../../assets/imgs/Img_sy_banner_web.jpg") top left
-      no-repeat;
+    .bis("../../assets/imgs/Img_sy_banner_web.jpg");
     background-size: 100% 100%;
-
+    margin-top: -65px;
     .font-size3 {
       font-size: 32px;
     }
@@ -130,9 +129,9 @@ export default {
   .banner {
     padding-top: 44px;
     height: 320px;
-    background: url("../../assets/imgs/Img_sy_banner_wap.jpg") top left
-      no-repeat;
+    .bis("../../assets/imgs/Img_sy_banner_wap.jpg");
     background-size: 100% 100%;
+    margin-top: -44px;
 
     .font-size3 {
       font-size: 18px;

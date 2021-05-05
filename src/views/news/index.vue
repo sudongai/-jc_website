@@ -5,8 +5,12 @@
       <p class="h2-title">news</p>
     </div>
     <div class="news-list-box">
-      <div v-for="item in newsList" :key="item.newsId" class="cur-news-box">
-        <img :src="item.cover" class="img">
+      <div v-for="item in newsList"
+           :key="item.newsId"
+           class="cur-news-box">
+        <img :src="item.cover"
+             class="img"
+             @click="toDetail(item)">
         <span class="title">{{item.title}}</span>
         <div class="cen-line"></div>
         <span class="subtitle">{{item.subtitle}}</span>
@@ -14,7 +18,7 @@
           <span>{{time(item.createTime)[0]}}</span>
           <br>
           <span>{{time(item.createTime)[1]}}</span>
-          </div>
+        </div>
       </div>
       <i></i>
     </div>
@@ -22,7 +26,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import { mapMutations } from 'vuex'
 import api from '@api'
 export default {
   data () {
@@ -34,14 +38,22 @@ export default {
     time () {
       return (val) => {
         let arr = val.split('-')
-        return [arr[0], '-'+arr[1]]
+        return [arr[0], '-' + arr[1]]
       }
     }
   },
   watch: {
   },
   methods: {
-    ...mapMutations(['setNewsList'])
+    ...mapMutations(['setNewsList']),
+    toDetail (item) {
+      this.$router.push({
+        path: '/news_detail',
+        query: {
+          id: item.id
+        }
+      })
+    }
   },
   components: {
   },

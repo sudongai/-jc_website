@@ -1,52 +1,71 @@
 <template>
-<div class="page-box">
-  <div class="nav-bar-box">
-    <!-- 首页是红色的logo-->
-    <img v-if="$route.path==='/index'" :src="whiteLogo" class="img">
-    <!-- 除首页，详情页外，其它页面是白色logo  -->
-    <img v-else-if="$route.path!=='/index' && $route.path!=='/case_detail' && $route.path!=='/news_detail'" :src="redLogo" class="img">
-    <!-- 详情页导航栏专属 -->
-    <div v-else-if="$route.path!=='/case_detail' || $route.path!=='/news_detail'" >
-      <!-- 通过css媒体查询控制导航栏最左侧，移动端显示回退按钮，pc端显示logo -->
-      <img :src="redLogo" class="case-detail-img">
-      <div class="detail-back">
-        <i class="iconfont icon-fanhui"></i>
-        <el-button class="case-detail-title" type="text" @click="$router.go(-1)">
-          {{$route.path==='/news_detail'?'新闻详情':($route.path==='/case_detail'?'案例详情':'')}}
-        </el-button>
+  <div class="page-box">
+    <div class="nav-bar-box"
+         :class="$route.path!=='/index'?'not-index-page':''">
+      <!-- 首页是红色的logo-->
+      <img v-if="$route.path==='/index'"
+           :src="whiteLogo"
+           class="img">
+      <!-- 除首页，详情页外，其它页面是白色logo  -->
+      <img v-else-if="$route.path!=='/index' && $route.path!=='/case_detail' && $route.path!=='/news_detail'"
+           :src="redLogo"
+           class="img">
+      <!-- 详情页导航栏专属 -->
+      <div v-else-if="$route.path!=='/case_detail' || $route.path!=='/news_detail'">
+        <!-- 通过css媒体查询控制导航栏最左侧，移动端显示回退按钮，pc端显示logo -->
+        <img :src="redLogo"
+             class="case-detail-img">
+        <div class="detail-back">
+          <i class="iconfont icon-fanhui"></i>
+          <el-button class="case-detail-title"
+                     type="text"
+                     @click="$router.go(-1)">
+            {{$route.path==='/news_detail'?'新闻详情':($route.path==='/case_detail'?'案例详情':'')}}
+          </el-button>
+        </div>
       </div>
+      <!-- pc端导航栏 -->
+      <nav class="nav-box">
+        <router-link to="/index"
+                     :class="{'nav-switch-sty': $route.path==='/index'}">首页</router-link>
+        <router-link to="/service"
+                     :class="{'nav-switch-sty': $route.path==='/service'}">服务</router-link>
+        <router-link to="/case"
+                     :class="{'nav-switch-sty': $route.path==='/case'}">案例</router-link>
+        <router-link to="/news"
+                     :class="{'nav-switch-sty': $route.path==='/news'}">新闻</router-link>
+        <router-link to="/contact"
+                     :class="{'nav-switch-sty': $route.path==='/contact'}">联系</router-link>
+      </nav>
+      <!-- 移动端导航入口 -->
+      <i class="iconfont icon-gengduo more-icon"
+         @click="open_mobile_menu"></i>
     </div>
-    <!-- pc端导航栏 -->
-    <nav class="nav-box">
-      <router-link to="/index" :class="{'nav-switch-sty': $route.path==='/index'}">首页</router-link>
-      <router-link to="/service" :class="{'nav-switch-sty': $route.path==='/service'}">服务</router-link>
-      <router-link to="/case" :class="{'nav-switch-sty': $route.path==='/case'}">案例</router-link>
-      <router-link to="/news" :class="{'nav-switch-sty': $route.path==='/news'}">新闻</router-link>
-      <router-link to="/contact" :class="{'nav-switch-sty': $route.path==='/contact'}">联系</router-link>
-    </nav>
-    <!-- 移动端导航入口 -->
-    <i class="iconfont icon-gengduo more-icon" @click="open_mobile_menu"></i>
+    <!-- 移动端导航抽屉 -->
+    <el-drawer :visible.sync="drawer"
+               class="drawer-box"
+               :close-on-press-escape="false"
+               :modal="false"
+               :show-close="false">
+      <div slot="title">
+        <i class="iconfont icon-guanbi"
+           @click="drawer_close"></i>
+        <img :src="whiteLogo">
+      </div>
+      <nav class="drawer-nav-box">
+        <span class="a"
+              @click="go_to_route('/index')">首页</span>
+        <span class="a"
+              @click="go_to_route('/service')">服务</span>
+        <span class="a"
+              @click="go_to_route('/case')">案例</span>
+        <span class="a"
+              @click="go_to_route('/news')">新闻</span>
+        <span class="a"
+              @click="go_to_route('/contact')">联系</span>
+      </nav>
+    </el-drawer>
   </div>
-  <!-- 移动端导航抽屉 -->
-  <el-drawer
-    :visible.sync="drawer"
-    class="drawer-box"
-    :close-on-press-escape="false"
-    :modal="false"
-    :show-close="false">
-    <div slot="title">
-      <i class="iconfont icon-guanbi" @click="drawer_close"></i>
-      <img :src="whiteLogo">
-    </div>
-    <nav class="drawer-nav-box">
-      <span class="a" @click="go_to_route('/index')">首页</span>
-      <span class="a" @click="go_to_route('/service')">服务</span>
-      <span class="a" @click="go_to_route('/case')">案例</span>
-      <span class="a" @click="go_to_route('/news')">新闻</span>
-      <span class="a" @click="go_to_route('/contact')">联系</span>
-    </nav>
-  </el-drawer>
-</div>
 </template>
 
 <script>
@@ -87,7 +106,6 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: #666;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,6 +115,15 @@ export default {
     a {
       display: inline-block;
       text-align: center;
+      color: #fff;
+    }
+  }
+}
+.not-index-page {
+  background-color: #fff;
+  .nav-box {
+    a {
+      color: #333333;
     }
   }
 }
@@ -110,7 +137,7 @@ export default {
     .case-detail-img {
       height: 40px; // PC端展示详情logo图标
     }
-    .detail-back{
+    .detail-back {
       display: none;
     }
     .more-icon {
@@ -121,10 +148,9 @@ export default {
         width: 75px;
         height: 65px;
         line-height: 65px;
-        color: #fff;
       }
       .nav-switch-sty {
-        background-color: #AF001E;
+        background-color: #af001e;
       }
     }
   }
@@ -133,7 +159,7 @@ export default {
   .drawer-box {
     /deep/ .el-drawer__container {
       div {
-        width: 100%!important;
+        width: 100% !important;
         background-color: #000;
         header {
           margin-bottom: 0;
@@ -143,7 +169,7 @@ export default {
             padding: 0 15px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #B3B3B3;
+            border-bottom: 1px solid #b3b3b3;
             img {
               height: 24px;
               margin-left: 118px;
@@ -162,8 +188,9 @@ export default {
               height: 45px;
               line-height: 45px;
               font-size: 12px;
-              color: #B3B3B3;
-              border-bottom: 1px solid #B3B3B3;
+              color: #b3b3b3;
+              border-bottom: 1px solid #b3b3b3;
+              cursor: pointer;
             }
           }
         }
@@ -184,8 +211,8 @@ export default {
       display: flex;
       align-items: center;
       .icon-fanhui {
-        font-size: 14px; 
-        font-weight: bold; 
+        font-size: 14px;
+        font-weight: bold;
         margin-right: 10px;
       }
       .case-detail-title {
@@ -198,7 +225,7 @@ export default {
     }
     .more-icon {
       display: block;
-      color: #fff;
+      color: @red;
     }
   }
 }

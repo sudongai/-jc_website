@@ -11,7 +11,14 @@ export default {
 </script>
 
 <style lang='less'>
-.container {
-  margin-top: 65px;
+@media only screen and (min-width: 1000px) {
+  .container {
+    margin-top: 65px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .container {
+    margin-top: 44px;
+  }
 }
 </style>
