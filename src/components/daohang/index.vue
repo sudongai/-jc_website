@@ -17,7 +17,7 @@
       </div>
     </div>
     <!-- pc端导航栏 -->
-    <nav class="nav">
+    <nav class="nav-box">
       <router-link to="/index" :class="{'nav-switch-sty': $route.path==='/index'}">首页</router-link>
       <router-link to="/service" :class="{'nav-switch-sty': $route.path==='/service'}">服务</router-link>
       <router-link to="/case" :class="{'nav-switch-sty': $route.path==='/case'}">案例</router-link>
