@@ -8,6 +8,8 @@ import './element-variables.scss'
 import '@common/font/iconfont.css'
 import '@common/css/common.less'
 import './assets/css/reset.css'
+import util from '@util/common.js'
+Vue.prototype.$util = util
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
