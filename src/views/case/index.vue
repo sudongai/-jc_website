@@ -6,25 +6,27 @@
         <p class="h1-title">服务案例</p>
         <p class="h2-title">SERVICE CASE</p>
       </div>
-      <el-tabs v-model="activeId"
-               @tab-click="handleClick">
-        <el-tab-pane v-for="item in categoryOptions"
-                     :key="item.categoryId"
-                     :label="item.cateName"
-                     :name="item.categoryId"></el-tab-pane>
+      <el-tabs v-model="activeId" @tab-click="handleClick">
+        <el-tab-pane
+          v-for="item in categoryOptions"
+          :key="item.categoryId"
+          :label="item.cateName"
+          :name="item.categoryId"
+        ></el-tab-pane>
       </el-tabs>
     </div>
     <div class="case-box">
-      <div v-for="(item, index) in caseListOptions"
-           :key="item.caseId"
-           class="case-item"
-           @click="switchCase(item.caseId, index)">
+      <div
+        v-for="(item, index) in caseListOptions"
+        :key="item.caseId"
+        class="case-item"
+        @click="switchCase(item.caseId, index)"
+      >
         <div class="case-img-box">
-          <img :src="item.cover"
-               alt="简创公关">
+          <img :src="item.cover" alt="简创公关" />
         </div>
-        <div class="case-title">| {{item.title}}</div>
-        <div class="case-company">{{item.company}}</div>
+        <div class="case-title">| {{ item.title }}</div>
+        <div class="case-company">{{ item.company }}</div>
       </div>
     </div>
   </div>
@@ -35,49 +37,61 @@ import api from '@api'
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'service',
-  data () {
+  data() {
     return {
-      activeId: '0',
+      activeId: '',
       categoryOptions: [],
-      caseListOptions: []
+      caseListOptions: [],
     }
   },
   props: [],
   components: {},
   computed: {
-    ...mapState(['caseList'])
+    ...mapState(['caseList']),
   },
-  watch: {
-  },
+  watch: {},
   methods: {
     ...mapMutations(['setCaseList', 'setCasePosition']),
-    async getCategory () {
-      const res = await api.getCategory().catch(err => Promise.reject(err))
+    async getCategory() {
+      let params = {
+        sign: this.$util.getSign({}),
+      }
+      const res = await api
+        .getCategory(params)
+        .catch((err) => Promise.reject(err))
       this.categoryOptions = res
     },
-    async getCaseList () {
-      const res = await api.getCaseList({ categoryId: this.activeId }).catch(err => Promise.reject(err))
+    async getCaseList() {
+      let params = {
+        page: '1',
+        pageSize: '20',
+        categoryId: this.activeId,
+      }
+      const res = await api
+        .getCaseList(
+          Object.assign(params, { sign: this.$util.getSign(params) })
+        )
+        .catch((err) => Promise.reject(err))
       this.caseListOptions = res.list
-      console.log(res.list)
       this.setCaseList(res.list) // 往仓库填案例列表数据
     },
-    handleClick () {
+    handleClick() {
       this.getCaseList()
     },
-    switchCase (id, index) {
+    switchCase(id, index) {
       this.setCasePosition(index)
       this.$router.push({
         path: '/case_detail',
         query: {
           caseId: id
-        }
+        },
       })
-    }
+    },
   },
-  created () {
+  created() {
     this.getCategory()
     this.getCaseList()
-  }
+  },
 }
 </script>
 
@@ -108,7 +122,7 @@ export default {
         }
         position: relative;
         &:after {
-          content: "";
+          content: '';
           position: absolute;
           top: 0;
           left: 0;
@@ -167,7 +181,7 @@ export default {
         }
         position: relative;
         &:after {
-          content: "";
+          content: '';
           position: absolute;
           top: 0;
           left: 50%;

@@ -5,19 +5,15 @@
       <p class="h2-title">news</p>
     </div>
     <div class="news-list-box">
-      <div v-for="item in newsList"
-           :key="item.newsId"
-           class="cur-news-box">
-        <img :src="item.cover"
-             class="img"
-             @click="toDetail(item)">
-        <span class="title">{{item.title}}</span>
+      <div v-for="item in newsList" :key="item.newsId" class="cur-news-box">
+        <img :src="item.cover" class="img" @click="toDetail(item)" />
+        <span class="title">{{ item.title }}</span>
         <div class="cen-line"></div>
-        <span class="subtitle">{{item.subtitle}}</span>
+        <span class="subtitle">{{ item.subtitle }}</span>
         <div class="createTime">
-          <span>{{time(item.createTime)[0]}}</span>
-          <br>
-          <span>{{time(item.createTime)[1]}}</span>
+          <span>{{ time(item.createTime)[0] }}</span>
+          <br />
+          <span>{{ time(item.createTime)[1] }}</span>
         </div>
       </div>
       <i></i>
@@ -29,35 +25,41 @@
 import { mapMutations } from 'vuex'
 import api from '@api'
 export default {
-  data () {
+  data() {
     return {
-      newsList: []
+      newsList: [],
     }
   },
   computed: {
-    time () {
+    time() {
       return (val) => {
         let arr = val.split('-')
         return [arr[0], '-' + arr[1]]
       }
-    }
+    },
   },
   methods: {
     ...mapMutations(['setNewsList']),
-    toDetail (item) {
+    toDetail(item) {
       this.$router.push({
         path: '/news_detail',
         query: {
-          id: item.id
-        }
+          id: item.id,
+        },
       })
-    }
+    },
   },
-  async created () {
-    const res = await api.getNewsList().catch(err => { })
+  async created() {
+    let params = {
+      page: '1',
+      pageSize: '20',
+    }
+    const res = await api
+      .getNewsList(Object.assign(params, this.$util.getSign(params)))
+      .catch((err) => {})
     this.newsList = res.list
     this.setNewsList(res) // 往仓库填案例列表数据
-  }
+  },
 }
 </script>
 
