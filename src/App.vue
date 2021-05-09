@@ -8,6 +8,14 @@
 
 <script>
 export default {
+  mounted () {
+    window.addEventListener('unload', this.saveState)
+  },
+  methods: {
+    saveState () {
+      sessionStorage.setItem('storeState', JSON.stringify(this.$store.state))
+    }
+  }
 }
 </script>
 
