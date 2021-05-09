@@ -52,13 +52,6 @@ export default {
     service,
     caseC,
     footertop
-  },
-  created () {
-    console.log(this.$util.getSign({
-      a: '111',
-      c: '555',
-      b: '333'
-    }))
   }
 }
 </script>

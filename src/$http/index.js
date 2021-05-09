@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import qs from 'qs'
 let service = axios.create() // 自定义 axios 实例
-service.defaults.timeout = 2500 // 设置超时时间
+service.defaults.timeout = 3000 // 设置超时时间
 // 各模式下的baseURL
 if (process.env.Node_ENV === 'production') { // 生产环境
   service.defaults.baseURL = process.env.VUE_APP_BASEURL // 设置基本地址
@@ -16,12 +16,22 @@ if (process.env.Node_ENV === 'production') { // 生产环境
 service.interceptors.request.use(
   // 请求前的处理
   config => {
-    console.log(config)
     if (Object.prototype.toString.call(config.data) === '[object FormData]') {
       return config
     }
     if (config.method === 'post') {
+      config.data = {
+        ...config.data,
+        time: new Date().getTime(),
+        source: 'jianc'
+      }
       config.data = qs.stringify(config.data)
+    } else if (config.method === 'get') {
+      config.params = {
+        ...config.params,
+        time: new Date().getTime(),
+        source: 'jianc'
+      }
     }
     return config
   },

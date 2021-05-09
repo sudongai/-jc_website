@@ -1,55 +1,83 @@
 <template>
   <div class="case-detail">
     <div class="main-page">
+      <!-- PC端的操作按钮 -->
       <div class="nav-key">
-        <el-button type="text"
-                   @click="returnFn">&lt; 返回</el-button>
-        <el-button type="text"
-                   :disabled='prevCaseStat'
-                   @click="prevCase"
-                   v-if="$route.path==='/case_detail'">上一个案例</el-button>
-        <el-button type="text"
-                   :disabled='nextCaseStat'
-                   @click="nextCase"
-                   v-if="$route.path==='/case_detail'">下一个案例</el-button>
-        <el-button type="text"
-                   :disabled='prevNewsStat'
-                   @click="prevNews"
-                   v-if="$route.path==='/news_detail'">上一条新闻</el-button>
-        <el-button type="text"
-                   :disabled='nextNewsStat'
-                   @click="nextNews"
-                   v-if="$route.path==='/news_detail'">下一条新闻</el-button>
+        <el-button type="text" @click="returnFn">&lt; 返回</el-button>
+        <el-button
+          type="text"
+          :disabled="prevCaseStat"
+          @click="prevCase"
+          v-if="$route.path === '/case_detail'"
+          >上一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextCaseStat"
+          @click="nextCase"
+          v-if="$route.path === '/case_detail'"
+          >下一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="prevNewsStat"
+          @click="prevNews"
+          v-if="$route.path === '/news_detail'"
+          >上一条新闻</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextNewsStat"
+          @click="nextNews"
+          v-if="$route.path === '/news_detail'"
+          >下一条新闻</el-button
+        >
       </div>
-      <div v-if="Object.keys(pageInfo).length > 0"
-           class="content-page">
-        <div class="det-title">{{pageInfo.caseInfo.description}}</div>
-        <!-- <div class="det-tags">{{pageInfo.caseInfo.tag}}</div> -->
-        <span class="det-tag"
-              v-for="(item, index) in pageInfo.caseInfo.tag"
-              :key="index"># {{item}}</span>
-        <hr class="det-hr">
-        <!-- <div class="det-description">{{pageInfo.caseInfo.description}}</div> -->
-        <div class="det-content"
-             v-html="pageInfo.caseInfo.content"></div>
+      <div class="content-container">
+        <div v-if="$route.path === '/case_detail' && Object.keys(caseInfo).length > 0" class="case-detail-content">
+          <div class="det-des"></div><!-- caseInfo.description 字符串 -->
+          <div class="det-tag"></div><!-- caseInfo.tag 字符串 -->
+          <hr class="det-hr" /><!-- hr 分隔线 -->
+          <div class="det-con"></div><!-- caseInfo.content 模板字符串 -->
+        </div>
+        <div v-if="$route.path === '/news_detail' && Object.keys(newsInfo).length > 0" class="news-detail-content">
+          <div class="det-title"></div><!-- newsInfo.title 标题 -->
+          <div class="det-create-time"></div><!-- newsInfo.createTime 创建时间 -->
+          <hr class="det-hr" /><!-- hr 分隔线 -->
+          <div class="det-subtitle"></div><!-- newsInfo.subtitle 副标题 -->
+          <div class="det-content"></div><!-- newsInfo.content 内容 -->
+        </div>
       </div>
+      <!-- 移动端的操作按钮 -->
       <div class="nav-bottom-key">
-        <el-button type="text"
-                   :disabled='prevCaseStat'
-                   @click="prevCase"
-                   v-if="$route.path==='/case_detail'">上一个案例</el-button>
-        <el-button type="text"
-                   :disabled='nextCaseStat'
-                   @click="nextCase"
-                   v-if="$route.path==='/case_detail'">下一个案例</el-button>
-        <el-button type="text"
-                   :disabled='prevNewsStat'
-                   @click="prevNews"
-                   v-if="$route.path==='/news_detail'">上一条新闻</el-button>
-        <el-button type="text"
-                   :disabled='nextNewsStat'
-                   @click="nextNews"
-                   v-if="$route.path==='/news_detail'">下一条新闻</el-button>
+        <el-button
+          type="text"
+          :disabled="prevCaseStat"
+          @click="prevCase"
+          v-if="$route.path === '/case_detail'"
+          >上一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextCaseStat"
+          @click="nextCase"
+          v-if="$route.path === '/case_detail'"
+          >下一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="prevNewsStat"
+          @click="prevNews"
+          v-if="$route.path === '/news_detail'"
+          >上一条新闻</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextNewsStat"
+          @click="nextNews"
+          v-if="$route.path === '/news_detail'"
+          >下一条新闻</el-button
+        >
       </div>
     </div>
   </div>
@@ -60,76 +88,90 @@ import { mapState, mapMutations } from 'vuex'
 import api from '@api'
 export default {
   name: 'caseDetail',
-  data () {
+  data() {
     return {
-      pageInfo: {},
-      caseId: ''
+      caseInfo: {},
+      newsInfo: {}
     }
   },
   computed: {
     ...mapState(['casePosition', 'newsPosition', 'caseList', 'newsList']),
-    prevCaseStat () {
+    /**
+     * prevCaseStat 是否禁用'上一个案例'按钮
+     * nextCaseStat 是否禁用'下一个案例'按钮
+     * prevNewsStat 是否禁用'上一个新闻'按钮
+     * nextNewsStat 是否禁用'下一个新闻'按钮
+     */
+    prevCaseStat() {
       return this.casePosition <= 0
     },
-    nextCaseStat () {
+    nextCaseStat() {
       return this.casePosition >= this.caseList.length - 1
     },
-    prevNewsStat () {
+    prevNewsStat() {
       return this.newsPosition <= 0
     },
-    nextNewsStat () {
+    nextNewsStat() {
       return this.newsPosition >= this.newsList.length - 1
-    }
+    },
   },
   methods: {
     ...mapMutations(['setCasePosition', 'setNewsPosition']),
-    returnFn () {
+    // PC 端'返回'按钮
+    returnFn() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    prevCase () {
+    // 上一个案例
+    prevCase() {
       this.setCasePosition(this.casePosition - 1)
       const caseId = this.caseList[this.casePosition].caseId
       this.getCaseDetail(caseId)
     },
-    nextCase () {
+    // 下一个案例
+    nextCase() {
       this.setCasePosition(this.casePosition + 1)
       const caseId = this.caseList[this.casePosition].caseId
       this.getCaseDetail(caseId)
     },
-    prevNews () {
+    // 上一条新闻
+    prevNews() {
       this.setNewsPosition(this.newsPosition - 1)
       const newsId = this.newsList[this.newsPosition].newsId
       this.getNewsDetail(newsId)
     },
-    nextNews () {
+    // 下一条新闻
+    nextNews() {
       this.setNewsPosition(this.newsPosition + 1)
       const newsId = this.newsList[this.newsPosition].newsId
       this.getNewsDetail(newsId)
     },
     // 通过caseId获取案例详情
-    async getCaseDetail (caseId) {
-      const res = await api.getCaseDetail({ caseId }).catch(() => { })
-      // 歧义 数据格式有歧义，待定
-      const { caseInfo, imgList } = res
-      this.$set(this.pageInfo, 'caseInfo', caseInfo)
-      this.$set(this.pageInfo, 'imgList', imgList)
+    async getCaseDetail(params) {
+      const res = await api.getCaseDetail(params).catch(() => {})
+      const { caseInfo } = res
+      this.caseInfo = caseInfo
     },
     // 通过newsId获取新闻详情
-    async getNewsDetail (newsId) {
-      const res = await api.getNewsDetail({ newsId }).catch(() => { })
-      // 歧义 数据格式有歧义，待定
-    }
+    async getNewsDetail(newsId) {
+      const res = await api.getNewsDetail({ newsId }).catch(() => {})
+      this.newsInfo = res
+    },
   },
-  created () {
+  created() {
+    // 根据当前路由来区分'案例详情' || '新闻详情'，并请求对应的详情数据
     if (this.$route.path === '/case_detail') {
-      console.log('路由参数', this.$route.query.caseId)
-      this.getCaseDetail(this.$route.query.caseId)
+      let params = {
+        caseId: this.$route.query.caseId,
+      }
+      this.getCaseDetail(Object.assign(params, this.$util.getSign(params)))
     }
     if (this.$route.path === '/news_detail') {
-      console.log('路由参数', this.$route.query.newsId)
-      this.getNewsDetail(this.$route.query.newsId)
+      let params = {
+        newsId: this.$route.query.newsId,
+      }
+      this.getNewsDetail(Object.assign(params, this.$util.getSign(params)))
     }
-  }
+  },
 }
 </script>
 
