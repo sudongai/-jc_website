@@ -5,12 +5,16 @@
       <p class="h2-title">news</p>
     </div>
     <div class="news-list-box">
-      <div v-for="(item,index) in newsList"
-           :key="item.newsId"
-           class="cur-news-box">
-        <img :src="item.cover"
-             class="img"
-             @click="handleToDetail(item,index)" />
+      <div
+        v-for="(item, index) in newsList"
+        :key="item.newsId"
+        class="cur-news-box"
+      >
+        <img
+          :src="item.cover"
+          class="img"
+          @click="handleToDetail(item, index)"
+        />
         <span class="title">{{ item.title }}</span>
         <div class="cen-line"></div>
         <span class="subtitle">{{ item.subtitle }}</span>
@@ -45,7 +49,6 @@ export default {
   methods: {
     ...mapMutations(['setNewsList', 'setNewsIndex']),
     handleToDetail (item, index) {
-      console.log('handleToDetail==================', item, index);
       this.setNewsIndex(index)
       this.$router.push({
         path: '/news_detail',

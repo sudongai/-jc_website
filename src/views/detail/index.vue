@@ -3,61 +3,98 @@
     <div class="main-page">
       <!-- PC端的操作按钮 -->
       <div class="nav-key">
-        <el-button type="text"
-                   @click="returnFn">&lt; 返回</el-button>
-        <el-button type="text"
-                   :disabled="prevCaseStat"
-                   @click="prevCase"
-                   v-if="$route.path === '/case_detail'">上一个案例</el-button>
-        <el-button type="text"
-                   :disabled="nextCaseStat"
-                   @click="nextCase"
-                   v-if="$route.path === '/case_detail'">下一个案例</el-button>
-        <el-button type="text"
-                   :disabled="prevNewsStat"
-                   @click="prevNews"
-                   v-if="$route.path === '/news_detail'">上一条新闻</el-button>
-        <el-button type="text"
-                   :disabled="nextNewsStat"
-                   @click="nextNews"
-                   v-if="$route.path === '/news_detail'">下一条新闻</el-button>
+        <el-button type="text" @click="returnFn">&lt; 返回</el-button>
+        <el-button
+          type="text"
+          :disabled="prevCaseStat"
+          @click="prevCase"
+          v-if="$route.path === '/case_detail'"
+          >上一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextCaseStat"
+          @click="nextCase"
+          v-if="$route.path === '/case_detail'"
+          >下一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="prevNewsStat"
+          @click="prevNews"
+          v-if="$route.path === '/news_detail'"
+          >上一条新闻</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextNewsStat"
+          @click="nextNews"
+          v-if="$route.path === '/news_detail'"
+          >下一条新闻</el-button
+        >
       </div>
-      <div v-if="$route.path === '/case_detail' && Object.keys(caseInfo).length > 0"
-           class="case-detail-content">
-        <div class="det-title">{{caseInfo.description || '这是title'}}</div>
-        <div class="det-tag"># {{caseInfo.tag || '这是tag'}}</div>
-        <hr class="det-hr" /><!-- hr 分隔线 -->
-        <div class="det-con"
-             v-html="caseInfo.content ||'内容html'"></div>
+      <!-- 案例详情主体内容 -->
+      <div
+        v-if="
+          $route.path === '/case_detail' && Object.keys(caseInfo).length > 0
+        "
+        class="case-detail-content"
+      >
+        <div class="det-title">{{ caseInfo.description || '这是title' }}</div>
+        <div class="det-tag"># {{ caseInfo.tag || '这是tag' }}</div>
+        <hr class="det-hr" />
+        <!-- hr 分隔线 -->
+        <div class="det-content" v-html="htmlDecode(caseInfo.content)"></div>
       </div>
-      <div v-if="$route.path === '/news_detail' && Object.keys(newsInfo).length > 0"
-           class="news-detail-content">
-        <div class="det-title">{{newsInfo.title || '这是title'}}</div>
-        <div class="det-create-time">发布时间：{{newsInfo.createTime || 'XXXX-XX-XX'}}</div>
-        <hr class="det-hr" /><!-- hr 分隔线 -->
+      <!-- 新闻详情主体内容 -->
+      <div
+        v-if="
+          $route.path === '/news_detail' && Object.keys(newsInfo).length > 0
+        "
+        class="news-detail-content"
+      >
+        <div class="det-title">{{ newsInfo.title || '这是title' }}</div>
+        <div class="det-create-time">
+          发布时间：{{ newsInfo.createTime || 'XXXX-XX-XX' }}
+        </div>
+        <hr class="det-hr" />
+        <!-- hr 分隔线 -->
         <!-- <div class="det-subtitle"></div>newsInfo.subtitle 副标题 -->
-        <div class="det-content"
-             v-html="newsInfo.content || 'content-html'"></div>
+        <div
+          class="det-content"
+          v-html="htmlDecode(newsInfo.content)"
+        ></div>
       </div>
       <!-- 移动端的操作按钮 -->
-      <div class="
-             nav-bottom-key">
-        <el-button type="text"
-                   :disabled="prevCaseStat"
-                   @click="prevCase"
-                   v-if="$route.path === '/case_detail'">上一个案例</el-button>
-        <el-button type="text"
-                   :disabled="nextCaseStat"
-                   @click="nextCase"
-                   v-if="$route.path === '/case_detail'">下一个案例</el-button>
-        <el-button type="text"
-                   :disabled="prevNewsStat"
-                   @click="prevNews"
-                   v-if="$route.path === '/news_detail'">上一条新闻</el-button>
-        <el-button type="text"
-                   :disabled="nextNewsStat"
-                   @click="nextNews"
-                   v-if="$route.path === '/news_detail'">下一条新闻</el-button>
+      <div class="nav-bottom-key">
+        <el-button
+          type="text"
+          :disabled="prevCaseStat"
+          @click="prevCase"
+          v-if="$route.path === '/case_detail'"
+          >上一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextCaseStat"
+          @click="nextCase"
+          v-if="$route.path === '/case_detail'"
+          >下一个案例</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="prevNewsStat"
+          @click="prevNews"
+          v-if="$route.path === '/news_detail'"
+          >上一条新闻</el-button
+        >
+        <el-button
+          type="text"
+          :disabled="nextNewsStat"
+          @click="nextNews"
+          v-if="$route.path === '/news_detail'"
+          >下一条新闻</el-button
+        >
       </div>
     </div>
   </div>
@@ -96,6 +133,14 @@ export default {
     }
   },
   methods: {
+    htmlDecode (text) {
+      let temp = document.createElement("div");
+      temp.innerHTML = text;
+      //textContent 火狐不支持innnerText
+      let output = temp.innerText || temp.textContent;
+      temp = null;
+      return output;
+    },
     // 下标
     ...mapMutations(['setCaseIndex', 'setNewsIndex']),
     // PC 端'返回'按钮
@@ -179,8 +224,12 @@ export default {
     font-size: 12px;
   }
   .det-content {
-    /deep/ img {
-      width: 100%;
+    /deep/ p {
+      overflow: hidden;
+      img {
+        margin: 5px 0;
+        width: 100%;
+      }
     }
   }
 }
