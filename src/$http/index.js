@@ -4,17 +4,7 @@ import qs from 'qs'
 import util from '@util/common'
 let service = axios.create() // 自定义 axios 实例
 service.defaults.timeout = 3000 // 设置超时时间
-    // 各模式下的baseURL
-if (process.env.NODE_ENV === 'production') {
-    // 生产环境
-    service.defaults.baseURL = process.env.VUE_APP_BASEURL // 设置基本地址
-} else if (process.env.NODE_ENV === 'development') {
-    // 开发环境
-    service.defaults.baseURL = process.env.VUE_APP_BASEURL // 设置基本地址
-} else {
-    // 测试环境
-    service.defaults.baseURL = process.env.VUE_APP_BASEURL // 设置基本地址
-}
+service.defaults.baseURL = process.env.VUE_APP_BASEURL // 设置基本地址
 
 // 请求拦截器
 service.interceptors.request.use(
