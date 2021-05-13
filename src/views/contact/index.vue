@@ -49,7 +49,6 @@ export default {
 
 <style lang='less' scoped>
 .banner {
-  .bis("../../assets/imgs/banner-contact.jpeg");
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,6 +60,7 @@ export default {
 }
 @media only screen and (min-width: 1000px) {
   .banner {
+    .bis("../../assets/imgs/Img_lx.jpg");
     .wh(100%,682px);
     .logo-img {
       height: 60px;
@@ -76,6 +76,7 @@ export default {
 }
 @media only screen and (max-width: 1000px) {
   .banner {
+    .bis("../../assets/imgs/Img_lx_wap.jpg");
     .wh(100%,500px);
     .logo-img {
       height: 40px;
