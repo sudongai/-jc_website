@@ -5,23 +5,19 @@
       <p class="h2-title">news</p>
     </div>
     <div class="news-list-box">
-      <div
-        v-for="(item, index) in newsList"
-        :key="item.newsId"
-        class="cur-news-box"
-      >
-        <img
-          :src="item.cover"
-          class="img"
-          @click="handleToDetail(item, index)"
-        />
+      <div v-for="(item, index) in newsList"
+           :key="item.newsId"
+           class="cur-news-box">
+        <img :src="item.cover"
+             class="img"
+             @click="handleToDetail(item, index)" />
         <span class="title">{{ item.title }}</span>
         <div class="cen-line"></div>
         <span class="subtitle">{{ item.subtitle }}</span>
         <div class="createTime">
-          <span>{{ time(item.createTime)[0] }}</span>
-          <br />
-          <span>{{ time(item.createTime)[1] }}</span>
+          <span>{{ item.createTime.split("-")[0] }}</span>
+          <br>
+          <span>{{'-'+ item.createTime.split("-")[1] }}</span>
         </div>
       </div>
       <i></i>
@@ -37,14 +33,6 @@ export default {
     return {
       newsList: [],
     }
-  },
-  computed: {
-    time () {
-      return (val) => {
-        let arr = val.split('-')
-        return [arr[0], '-' + arr[1]]
-      }
-    },
   },
   methods: {
     ...mapMutations(['setNewsList', 'setNewsIndex']),

@@ -1,13 +1,15 @@
 <template>
   <div class="page-box">
     <div class="nav-bar-box"
-         :class="[$route.path !== '/index' ? 'not-index-page' : '' , $route.path === '/index' && navbg ? 'navbg' : '']">
-      <!-- 首页是红色的logo-->
-      <img v-if="$route.path==='/index'"
-           :src="whiteLogo"
-           class="img">
-      <!-- 除首页，详情页外，其它页面是白色logo  -->
-      <img v-else-if="$route.path!=='/index' && $route.path!=='/case_detail' && $route.path!=='/news_detail'"
+         :class="[$route.path !== '/index' ? 'not-index-page' : '']"
+         :style="$route.path === '/index' ? navStyle.backgroundColor : ''">
+      <!-- 首页是scrollTop < 95白色的logo 否则红色logo-->
+      <span v-if="$route.path === '/index'">
+        <img :src="scrollTop < 95 ? whiteLogo : redLogo"
+             class="img">
+      </span>
+      <!-- 除首页，详情页外，其它页面是红色logo  -->
+      <img v-else-if="$route.path !== '/index' && $route.path !== '/case_detail' && $route.path !== '/news_detail'"
            :src="redLogo"
            class="img">
       <!-- 详情页导航栏专属 -->
@@ -27,15 +29,19 @@
       <!-- pc端导航栏 -->
       <nav class="nav-box">
         <router-link to="/index"
-                     :class="{'nav-switch-sty': $route.path==='/index'}">首页</router-link>
+                     :class="{'pc-nav-isActive': $route.path==='/index'}">首页</router-link>
         <router-link to="/service"
-                     :class="{'nav-switch-sty': $route.path==='/service'}">服务</router-link>
+                     :style="$route.path === '/index' ? navStyle.fontColor : ''"
+                     :class="{'pc-nav-isActive': $route.path==='/service'}">服务</router-link>
         <router-link to="/case"
-                     :class="{'nav-switch-sty': $route.path==='/case'}">案例</router-link>
+                     :style="$route.path === '/index' ? navStyle.fontColor : ''"
+                     :class="{'pc-nav-isActive': $route.path==='/case'}">案例</router-link>
         <router-link to="/news"
-                     :class="{'nav-switch-sty': $route.path==='/news'}">新闻</router-link>
+                     :style="$route.path === '/index' ? navStyle.fontColor : ''"
+                     :class="{'pc-nav-isActive': $route.path==='/news'}">新闻</router-link>
         <router-link to="/contact"
-                     :class="{'nav-switch-sty': $route.path==='/contact'}">联系</router-link>
+                     :style="$route.path === '/index' ? navStyle.fontColor : ''"
+                     :class="{'pc-nav-isActive': $route.path==='/contact'}">联系</router-link>
       </nav>
       <!-- 移动端导航入口 -->
       <i class="iconfont icon-gengduo more-icon"
@@ -54,14 +60,19 @@
       </div>
       <nav class="drawer-nav-box">
         <span class="a"
+              :class="{'m-nav-isActive': $route.path==='/index'}"
               @click="go_to_route('/index')">首页</span>
         <span class="a"
+              :class="{'m-nav-isActive': $route.path==='/service'}"
               @click="go_to_route('/service')">服务</span>
         <span class="a"
+              :class="{'m-nav-isActive': $route.path==='/case'}"
               @click="go_to_route('/case')">案例</span>
         <span class="a"
+              :class="{'m-nav-isActive': $route.path==='/news'}"
               @click="go_to_route('/news')">新闻</span>
         <span class="a"
+              :class="{'m-nav-isActive': $route.path==='/contact'}"
               @click="go_to_route('/contact')">联系</span>
       </nav>
     </el-drawer>
@@ -78,7 +89,13 @@ export default {
       whiteLogo,
       redLogo,
       drawer: false,
-      navbg: false
+      navStyle: {
+        backgroundColor: {},
+        fontColor: {}
+      },
+      navbgStyle: {},
+      opacity: 0,
+      scrollTop: 0
     }
   },
   mounted () {
@@ -96,8 +113,10 @@ export default {
       this.drawer = false
     },
     windowScroll () {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      this.navbg = scrollTop >= 500
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      this.opacity = Math.abs(Math.round(this.scrollTop)) / 190;
+      this.navStyle.backgroundColor = { background: `rgba(255, 255, 255,${this.opacity})` }
+      this.navStyle.fontColor = { color: this.scrollTop > 95 ? '#000' : '#fff' }
     }
   },
   beforeDestroy () {
@@ -118,6 +137,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+
   .nav-box {
     display: inline-flex;
     align-items: center;
@@ -151,22 +172,18 @@ export default {
         height: 65px;
         line-height: 65px;
       }
-      .nav-switch-sty {
+      .pc-nav-isActive {
         background-color: #af001e;
         color: #fff;
       }
     }
   }
   .not-index-page {
-    background-color: #fff;
     .nav-box {
       a {
         color: #333333;
       }
     }
-  }
-  .navbg {
-    background: #333;
   }
 }
 @media screen and (max-width: 1000px) {
@@ -202,9 +219,12 @@ export default {
               height: 45px;
               line-height: 45px;
               font-size: 12px;
-              color: #b3b3b3;
+              color: #fff;
               border-bottom: 1px solid #b3b3b3;
               cursor: pointer;
+            }
+            .m-nav-isActive {
+              color: #b3b3b3;
             }
           }
         }

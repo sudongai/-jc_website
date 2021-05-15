@@ -99,12 +99,16 @@ export default {
       /deep/ .el-tabs__nav-wrap::after {
         height: 0;
       }
+      /deep/ .el-tabs__item {
+        font-weight: bold;
+      }
     }
   }
   .case-box {
     .flex-box(flex-start);
     flex-wrap: wrap;
     .case-item {
+      cursor: pointer;
       &:hover .case-title {
         color: @red;
       }
@@ -152,8 +156,12 @@ export default {
     display: flex;
     flex-direction: column;
     .el-tabs {
+      padding-right: 15px;
       /deep/ .el-tabs__nav-wrap::after {
         height: 0;
+      }
+      /deep/ .el-tabs__item {
+        font-weight: bold;
       }
     }
   }
