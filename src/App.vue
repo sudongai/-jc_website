@@ -5,7 +5,6 @@
     <router-view name="footer"></router-view>
   </div>
 </template>
-
 <script>
 export default {
   mounted () {
