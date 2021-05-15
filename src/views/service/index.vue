@@ -98,7 +98,6 @@ export default {
 </script>
 <style lang='less' scoped>
 .banner {
-  background: rgb(56, 123, 126);
   .flex-box(space-between);
   align-items: center;
   .banner-item {
@@ -121,6 +120,7 @@ export default {
 }
 @media only screen and (min-width: 1000px) {
   .banner {
+    .bis("../../assets/imgs/Img_fw_jy.jpg");
     padding: 0 351px;
     height: 330px;
     .banner-item {
@@ -148,6 +148,7 @@ export default {
 }
 @media only screen and (max-width: 1000px) {
   .banner {
+    .bis("../../assets/imgs/Img_bg_jy.jpg");
     height: 198px;
     .banner-item {
       flex: 1;
@@ -185,6 +186,9 @@ export default {
     position: relative;
     .c-box {
       position: absolute;
+      .title {
+        font-weight: bold;
+      }
     }
   }
 }
